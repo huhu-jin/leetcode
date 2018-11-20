@@ -1,7 +1,7 @@
 package jin.learn;
 
 //Reverse Linked List
-
+// 添加一个多的节点 一个一个累积上去
 public class Solution_206 {
 
     public class ListNode {
