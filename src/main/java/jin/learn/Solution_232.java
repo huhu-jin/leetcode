@@ -18,7 +18,6 @@ public class Solution_232 {
         peek();
         output.pop();
     }
-
     public int peek() {
         if (output.empty())
             while (!input.empty())
