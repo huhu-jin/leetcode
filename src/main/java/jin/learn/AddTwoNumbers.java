@@ -1,7 +1,7 @@
 package jin.learn;
 
 /**
- * 普通逻辑,细节上处理
+ * 普通逻辑,细节注意
  */
 public class AddTwoNumbers {
 
