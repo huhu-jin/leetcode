@@ -7,4 +7,5 @@
 !*.java
 /.idea/
 /target/
-jdbc.properties
+all.json
+translation.json
