@@ -1,6 +1,7 @@
 package jin.learn;
 
-import org.junit.Test;
+
+import org.testng.annotations.Test;
 
 public class FindMedianSortedArrays {
 

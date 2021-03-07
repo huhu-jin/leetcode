@@ -1,6 +1,6 @@
 package jin.learn;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 // 判断该数字是否是回文数字
 // 方法该数字掉头,然后和原来是否相等.

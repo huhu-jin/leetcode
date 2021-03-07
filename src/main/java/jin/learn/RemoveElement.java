@@ -3,8 +3,8 @@ package jin.learn;
 // arrays 迭代问题 双指针
 // i 迭代,遇到!val,赋值r r前走
 // nums[res++] 这个怎么理解  []优先级别大于++
-import org.junit.Assert;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class RemoveElement {
 

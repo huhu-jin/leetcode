@@ -1,6 +1,6 @@
 package jin.learn;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * dp[j][i]表示，pattern字符串的子串(0,j)是否和目标字符串的子串(0,i)匹配

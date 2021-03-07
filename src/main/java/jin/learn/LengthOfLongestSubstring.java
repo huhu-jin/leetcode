@@ -1,7 +1,7 @@
 package jin.learn;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 /**
  * 在提供的字符串(包括!#2})中,查找不重复子串的最大长度

@@ -1,7 +1,7 @@
 package jin.learn;
 
 import com.sun.media.sound.SoftTuning;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.util.LinkedList;
 import java.util.List;

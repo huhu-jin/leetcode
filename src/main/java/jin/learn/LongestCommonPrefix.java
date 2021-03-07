@@ -2,7 +2,7 @@ package jin.learn;
 // 14
 // 最长公共 pre的串
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 // 以第一个 String 作为模板
 // 然后逐个比较是否是 子串
