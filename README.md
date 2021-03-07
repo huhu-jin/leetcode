@@ -19,7 +19,7 @@ $!velocityTool.camelCaseName(${question.titleSlug})
 
 ${question.content}
 
-package com.jin.learn.leetcode.editor.cn
+package com.jin.learn.leetcode.editor.cn;
 
 public class $!velocityTool.camelCaseName(${question.titleSlug}){
   
