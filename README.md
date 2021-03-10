@@ -21,10 +21,18 @@ ${question.content}
 
 package com.jin.learn.leetcode.editor.cn;
 
+import org.testng.annotations.Test;
+
+
 public class $!velocityTool.camelCaseName(${question.titleSlug}){
   
   
-  ${question.code}
+    ${question.code}
+    
+    @Test
+    public void testCase(){
+        
+    }
   
 }
 ```
