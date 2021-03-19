@@ -58,7 +58,7 @@ public class ReverseLinkedListIi{
  */
 class Solution {
     public ListNode reverseBetween(ListNode head, int left, int right) {
-        // 设置 dummyNode 是这一类问题的一般做法
+        // 关键点:设置 dummyNode 是这一类问题的一般做法
         ListNode dummyNode = new ListNode(-1);
         dummyNode.next = head;
         ListNode pre = dummyNode;
@@ -67,7 +67,8 @@ class Solution {
         }
         ListNode cur = pre.next;
         ListNode next;
-        for (int i = 0; i < right - left; i++) {
+        for (int i = 0; i + left < right  ; i++) {
+            //关键点: pre ,cur 不变 而 next一直变.
             next = cur.next;
             cur.next = next.next;
             next.next = pre.next;
@@ -90,7 +91,7 @@ class Solution {
         listNode2.next = listNode3;
         listNode3.next = listNode4;
         listNode4.next = listNode5;
-        new Solution().reverseBetween(listNode1,1,2);
+        new Solution().reverseBetween(listNode1,2,4);
 
 //        new Solution().reverseBetween(listNode5,1,1);
     }
