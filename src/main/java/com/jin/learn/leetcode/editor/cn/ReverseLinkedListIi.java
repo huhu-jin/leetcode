@@ -61,18 +61,18 @@ class Solution {
         // 关键点:设置 dummyNode 是这一类问题的一般做法
         ListNode dummyNode = new ListNode(-1);
         dummyNode.next = head;
-        ListNode pre = dummyNode;
+        ListNode g = dummyNode;
         for (int i = 0; i < left - 1; i++) {
-            pre = pre.next;
+            g = g.next;
         }
-        ListNode cur = pre.next;
-        ListNode next;
+        // 双指针头插法 guard不动 point https://leetcode-cn.com/problems/reverse-linked-list-ii/solution/java-shuang-zhi-zhen-tou-cha-fa-by-mu-yi-cheng-zho/
+        ListNode p = g.next;
         for (int i = 0; i + left < right  ; i++) {
-            //关键点: pre ,cur 不变 而 next一直变.
-            next = cur.next;
-            cur.next = next.next;
-            next.next = pre.next;
-            pre.next = next;
+            ListNode moved = p.next;
+            if (moved == null) break;
+            p.next = moved.next; // 跨->双箭头位置变动
+            moved.next=g.next;
+            g.next = moved;
         }
         return dummyNode.next;
     }
