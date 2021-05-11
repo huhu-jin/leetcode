@@ -43,6 +43,8 @@ package com.jin.learn.leetcode.editor.cn;
 import com.jin.learn.leetcode.editor.cn.common.ListNode;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 
 public class MergeTwoSortedLists{
   
@@ -62,35 +64,16 @@ class Solution {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if(l1 == null) return l2;
         if(l2 == null) return l1;
-        ListNode dummy = new ListNode(-1);
-        ListNode temp ;
         if (l1.val <= l2.val) {
-            dummy.next = l1;
-            temp = l1;
-            l1 = l1.next;
-        } else {
-            dummy.next = l2;
-            temp = l2;
-            l2 = l2.next;
+            l1.next = mergeTwoLists(l1.next, l2);
+            return l1;
+        }else {
+            l2.next = mergeTwoLists(l1, l2.next);
+            return l2;
         }
-        while (l1 != null || l2 != null) {
-            if (l1 == null) {
-                temp.next = l2;
-                l2 = l2.next;
-            } else if (l2 == null) {
-                temp.next = l1;
-                l1 = l1.next;
-            } else if(l2.val <= l1.val) {
-                temp.next = l2;
-                l2 = l2.next;
-            } else  {
-                temp.next = l1;
-                l1 = l1.next;
-            }
-            temp = temp.next;
-        }
-        return dummy.next;
     }
+
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
