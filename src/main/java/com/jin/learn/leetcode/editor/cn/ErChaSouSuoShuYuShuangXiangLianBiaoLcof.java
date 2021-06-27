@@ -73,11 +73,33 @@ void dfs(Node root) {
 
 class Solution {
 
-    public Node treeToDoublyList(Node root) {
+    private Node pre;
+    private Node head;
 
-        return null;
+    public Node treeToDoublyList(Node root) {
+        if(root == null) return null;
+        dfs(root);
+        head.left =pre;
+        pre.right =head;
+        return head;
     }
 
+
+    private void dfs(Node cur) {
+        if(cur == null) return;
+        dfs(cur.left);
+
+        if(pre == null){
+            head= cur;
+            pre = cur;
+        }else{
+            pre.right = cur;
+            cur.left = pre;
+            pre = cur;
+        }
+
+        dfs(cur.right);
+    }
 
 }
 //leetcode submit region end(Prohibit modification and deletion)
