@@ -44,7 +44,7 @@ class Solution {
         return -1;
     }
 
-    // 原地换位 在i位置 就是i.
+    // 交换位置 使得 在i位置 就是i.
     public int findRepeatNumber2(int[] nums) {
 
         if (nums == null) return -1;

@@ -43,6 +43,7 @@ public class GuPiaoDeZuiDaLiRunLcof{
   
     //leetcode submit region begin(Prohibit modification and deletion)
     // 动态规划
+    // 递推公式 前i日最大利润=max(前(i−1)日最大利润,第i日价格−前i日最低价格)
 class Solution {
     public int maxProfit(int[] prices) {
         if(prices == null || prices.length==0) return 0;

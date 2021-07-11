@@ -40,62 +40,69 @@
 // 题目数据保证列表表示的数字不含前导零 
 // 
 // Related Topics 递归 链表 数学 
-// 👍 5748 👎 0
+// 👍 6433 👎 0
 
 
 package com.jin.learn.leetcode.editor.cn;
 
 import com.jin.learn.leetcode.editor.cn.common.ListNode;
+import org.testng.annotations.Test;
+import org.xml.sax.ext.Locator2;
 
-public class AddTwoNumbers{
-  
-  
-  //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
-class Solution {
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode retNode = null;
-        ListNode tempNode = null;
-        int temp =0;
-        while (l1 != null || l2 != null) {
-            int l1Value=0;
-            int l2Value=0;
-            if (l1 != null) {
-                l1Value = l1.val;
-                l1 = l1.next;
+
+public class AddTwoNumbers {
+
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     * Definition for singly-linked list.
+     * public class ListNode {
+     * int val;
+     * ListNode next;
+     * ListNode() {}
+     * ListNode(int val) { this.val = val; }
+     * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+     * }
+     */
+
+// 关键在于看懂题目
+// 低位在前
+    class Solution {
+
+        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+            ListNode head = null, tail = null;
+            int carry = 0;
+            while (l1 != null || l2 != null) {
+                int n1 = l1 != null ? l1.val : 0;
+                int n2 = l2 != null ? l2.val : 0;
+                int sum = n1 + n2 + carry;
+                if (head == null) {
+                    head = tail = new ListNode(sum % 10);
+                } else {
+                    tail.next = new ListNode(sum % 10);
+                    tail = tail.next;
+                }
+                carry = sum / 10;
+                if (l1 != null) {
+                    l1 = l1.next;
+                }
+                if (l2 != null) {
+                    l2 = l2.next;
+                }
             }
-            if (l2 != null) {
-                l2Value = l2.val;
-                l2 = l2.next;
+            if (carry > 0) {
+                tail.next = new ListNode(carry);
             }
-            int value = (l1Value+l2Value +temp)%10;
-            temp = (l1Value+l2Value +temp)/10;
-            if (retNode == null) {
-                retNode = new ListNode(value);
-                tempNode = retNode;
-            }else{
-                tempNode.next = new ListNode(value);
-                tempNode = tempNode.next;
-            }
+            return head;
         }
-        if (temp != 0) {
-            ListNode listNode = new ListNode(temp);
-            tempNode.next = listNode;
-        }
-    return retNode;
     }
-
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
-  
+
+    @Test
+    public void testCase() {
+
+    }
+
 }
