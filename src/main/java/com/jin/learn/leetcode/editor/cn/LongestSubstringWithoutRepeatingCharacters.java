@@ -92,10 +92,10 @@ class Solution {
     }
 
         /**
-         *  滑动窗口:对应题中的最长字符串
+         *  滑动窗口:
          *  代码采用了一个hashmap记录窗口中元素信息(其中key为窗口元素,value为窗口元素的位置). 一个left位置指针,right位置指针, 在维护滑动窗口大小
          *  右边界right比较明确, 就是i
-         *  左边界left? 取每次put重复元素时候,前一次的该重复元素的位置.
+         *  左边界left? 遇到相同元素,去掉相同元素之前 窗口部分.如图pwabcw  pwabc -> abcw
          *  关键点:窗口边界如何滑动?
          *  此题中,left边界一定是遇到相同元素时, 从原先的同元素位置 开始算.
          */
@@ -121,7 +121,7 @@ class Solution {
         Assert.assertEquals(new Solution().lengthOfLongestSubstring(" "),1);
         Assert.assertEquals(new Solution().lengthOfLongestSubstring("abcabcbb"),3);
         Assert.assertEquals(new Solution().lengthOfLongestSubstring("bbbbbbbb"),1);
-        Assert.assertEquals(new Solution().lengthOfLongestSubstring("pwwkew"),3);
+        Assert.assertEquals(new Solution().bestPractice("pwwkew"),3);
   }
 
     @Test
