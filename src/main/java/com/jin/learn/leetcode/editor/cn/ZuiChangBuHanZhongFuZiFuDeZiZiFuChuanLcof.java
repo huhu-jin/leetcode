@@ -37,7 +37,7 @@
 // 注意：本题与主站 3 题相同：https://leetcode-cn.com/problems/longest-substring-without-rep
 //eating-characters/ 
 // Related Topics 哈希表 字符串 滑动窗口 
-// 👍 229 👎 0
+// 👍 234 👎 0
 
 
 package com.jin.learn.leetcode.editor.cn;
@@ -45,6 +45,8 @@ package com.jin.learn.leetcode.editor.cn;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 
 public class ZuiChangBuHanZhongFuZiFuDeZiZiFuChuanLcof{
@@ -65,14 +67,19 @@ class Solution {
             max = Math.max(max,i-left+1); // 计算窗口大小 i(right) - left +1
         }
         return max;
+
+
     }
+
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
     
     @Test
     public void testCase(){
-        
+
+
     }
   
 }
