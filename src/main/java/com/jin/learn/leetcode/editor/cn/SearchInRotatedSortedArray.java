@@ -52,7 +52,6 @@
 package com.jin.learn.leetcode.editor.cn;
 
 import org.testng.annotations.Test;
-import sun.jvm.hotspot.oops.ReceiverTypeData;
 
 
 public class SearchInRotatedSortedArray{
