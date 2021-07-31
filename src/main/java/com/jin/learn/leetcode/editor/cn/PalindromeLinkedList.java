@@ -43,6 +43,7 @@ public class PalindromeLinkedList {
      * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
      * }
      */
+    // 快指针走到末尾，慢指针刚好到中间。其中慢指针将前半部分反转。然后比较。 思路果然666
     class Solution {
 
 

@@ -32,7 +32,7 @@ public class ProductOfArrayExceptSelf{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    // nums [1,2,3,4]
+    // nums [1,2,3,4] 前缀之积(除自己以外所有的乘机) * 后置之积 就是答案
     // 前缀之积 [1,1,2,6] ,在求解前缀之积时 是可以迭代的 n = input[n] * n-1
     // 后置之积  [24,12,4,1]
     public int[] productExceptSelf(int[] nums) {

@@ -52,41 +52,33 @@ import org.testng.annotations.Test;
 
 public class LongestPalindromicSubstring{
   
-  
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     // 中心扩散法
+    // abba 的中心点
+    // a ab b bb b ba a 一共5个
+    // 这个迭代法很神奇. 两个变量, left right 0,0   0,1   1,1    1,2 迭代
+    // center / 2 , center / 2 + center % 2    这样迭代
     public String longestPalindrome(String s) {
-        if(s == null || "".equals(s)) return "";
+        // ababa 求最长公共子串
+        int len = s.length();
+        String result = "";
 
-        int maxLeft=0;
-        int maxRight=0;
-        for (int i = 0; i < s.length(); i++) {
-
-           int len1 =  expandAroundCenter(i, i, s);// bab
-           int len2 =  expandAroundCenter(i, i+1, s); // baab
-            if (len1 > len2 && len1 > (maxRight - maxLeft + 1)) {
-                maxLeft = i - len1 / 2;
-                maxRight = i + len1 / 2;
-            } else if (len2 > len1 && len2 > (maxRight - maxLeft + 1)) {
-                maxLeft = i - len2 / 2 + 1;
-                maxRight = i + len2 / 2;
-            }
-
-        }
-
-        return s.substring(maxLeft, maxRight+1);
-    }
-        // 从中心开始扩散
-        private int expandAroundCenter(int left, int right, String s) {
-            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+        for (int center = 0; center < len * 2 - 1; center++) {
+            int left = center / 2;
+            int right = left + center % 2;
+            while (left >= 0 && right < len && s.charAt(left) == s.charAt(right)) {
+                String tmp = s.substring(left, right + 1);
+                if (tmp.length() > result.length()) {
+                    result = tmp;
+                }
                 left--;
                 right++;
             }
-            return right - left - 1; // 会多走一步
         }
-
+        return result;
     }
+}
 //leetcode submit region end(Prohibit modification and deletion)
 
     
