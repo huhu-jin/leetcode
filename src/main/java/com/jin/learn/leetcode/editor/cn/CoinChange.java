@@ -68,8 +68,8 @@ public class CoinChange{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     // dp 这题是 从前面的 某个状态推到 当前状态
-    // 不是斐波那契 当前状态是 前两个 推的
-    // dp[n] =  min(dp[n-coins[i]])+1
+    // 不是斐波那契 当前状态是 直接由前面两个推的
+    // dp[n] =  min(dp[n-coins[i]])+1 迭代左右的硬币
     public int coinChange(int[] coins, int amount) {
         int[] dp = new int[amount + 1];
         dp[0] = 0;
