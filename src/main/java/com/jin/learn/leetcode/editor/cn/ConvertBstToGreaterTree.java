@@ -84,6 +84,7 @@ public class ConvertBstToGreaterTree{
 class Solution {
     // dfs  right root left 相当于翻中序遍历
     int sum = 0; // 利用一个变量
+
     public TreeNode convertBST(TreeNode root) {
         if (root != null) {
             convertBST(root.right);
