@@ -72,7 +72,7 @@ public class AddTwoNumbers {
 
         public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
             ListNode head = null, tail = null;
-            int carry = 0;
+            int carry = 0; //进位
             while (l1 != null || l2 != null) {
                 int n1 = l1 != null ? l1.val : 0;
                 int n2 = l2 != null ? l2.val : 0;

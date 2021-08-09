@@ -60,21 +60,22 @@ public class NextPermutation {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        // 1 l 从倒数第2个开始, h 从最后一个开始, 找升序
-        // 2  升序交换
+        // 1 p <- nums.length-2, m <- nums.length-1, m--, 在m>p,  找一个 nums[p]<nums[m]
+        // 2 交换
+        // 3 p+1以后排序
         public void nextPermutation(int[] nums) {
             if (nums == null || nums.length <= 1) return;
-
-            for (int l = nums.length - 2; l >= 0; l--) {
-                for (int h = nums.length - 1; l < h; h--) {
-                    if (nums[l] < nums[h]) {
-                        swap(nums, h, l);
-                        Arrays.sort(nums, l + 1, nums.length);
+            // 关键在于如何找升序 才是 next
+            for (int p = nums.length - 2; p >= 0; p--) {
+                for (int m = nums.length -1 ; m >p; m--) {
+                    if (nums[p] < nums[m]) {
+                        swap(nums, m, p);
+                        Arrays.sort(nums, p+1, nums.length);
                         return;
                     }
                 }
             }
-            Arrays.sort(nums);
+            Arrays.sort(nums); // 都是逆序
         }
 
         private void swap(int[] nums, int h, int l) {
@@ -88,8 +89,9 @@ public class NextPermutation {
 
     @Test
     public void testCase() {
-        new Solution().nextPermutation(new int[]{1,2});
         new Solution().nextPermutation(new int[]{4, 2, 0, 2, 3, 2, 0});
+        new Solution().nextPermutation(new int[]{1, 2, 3});
+        new Solution().nextPermutation(new int[]{1,2});
     }
 
 }

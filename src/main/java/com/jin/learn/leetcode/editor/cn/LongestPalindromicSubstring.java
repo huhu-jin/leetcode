@@ -65,8 +65,8 @@ class Solution {
         String result = "";
 
         for (int center = 0; center < len * 2 - 1; center++) {
-            int left = center / 2;
-            int right = left + center % 2;
+            int left = center / 2; // 关键
+            int right = left + center % 2; // 关键
             while (left >= 0 && right < len && s.charAt(left) == s.charAt(right)) {
                 String tmp = s.substring(left, right + 1);
                 if (tmp.length() > result.length()) {
