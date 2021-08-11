@@ -66,7 +66,9 @@ public class LowestCommonAncestorOfABinaryTree{
  */
 class Solution {
     //1. p q 一定是存在公共节点
-    //2  先序遍历 return带出公共节点
+    //2  递归 先序遍历
+    // 递归函数 return 等于 p q的root节点 并一层层 回溯
+    // 最后 left 和 right 都有 则是 答案
     //https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-hou-xu/
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) {

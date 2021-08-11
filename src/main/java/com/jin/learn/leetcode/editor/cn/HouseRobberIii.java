@@ -41,7 +41,6 @@ import com.jin.learn.leetcode.editor.cn.common.TreeNode;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
 
 public class HouseRobberIii{
@@ -89,6 +88,7 @@ class Solution {
 
         return Math.max(money, rob(root.left) + rob(root.right));
     }
+
    //  解法二、记忆化 - 解决重复子问题
    //  我们发现爷爷在计算自己能偷多少钱的时候，同时计算了 4 个孙子能偷多少钱，也计算了 2 个儿子能偷多少钱。这样在儿子当爷爷时，就会产生重复计算一遍孙子节点。
    HashMap<TreeNode,Integer> memo = new HashMap<TreeNode,Integer>();

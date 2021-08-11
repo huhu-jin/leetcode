@@ -51,6 +51,7 @@ public class MaximalSquare{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     //pos(i,j)=min(pos(i−1,j),pos(i−1,j−1),pos(i,j−1))+1
+    // min(上, 左, 左上) + 1
     // 这个dp表示 某个位置 最大正方形
     // 不是原来dp 表示[m][n] 在m n 矩形内
     public int maximalSquare(char[][] matrix) {

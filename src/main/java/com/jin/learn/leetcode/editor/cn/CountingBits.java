@@ -33,6 +33,7 @@ public class CountingBits{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    // 输出 0 -n 所有数字
         public int[] countBits(int num) {
             int[] result = new int[num + 1];
             for(int i = 1; i <= num; i++){

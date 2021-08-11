@@ -43,7 +43,7 @@ public class PalindromeLinkedList {
      * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
      * }
      */
-    // 快指针走到末尾，慢指针刚好到中间。其中慢指针将前半部分反转。然后比较。 思路果然666
+    // 快指针走到末尾，慢指针刚好到中间。其中慢指针将前半部分反转。然后比较。
     class Solution {
 
 
@@ -94,17 +94,26 @@ public class PalindromeLinkedList {
             return fast.next == null ? slow : slow.next;
         }
 
-        private ListNode frontPointer;
+ ///////////////////
+
+
+    private ListNode frontPointer;
 
     private boolean recursivelyCheck(ListNode currentNode) {
         if (currentNode != null) {
+            // 递
             if (!recursivelyCheck(currentNode.next)) {
                 return false;
             }
+
+            // 归
+            // 比较头和尾
             if (currentNode.val != frontPointer.val) {
                 return false;
             }
+            //头替换
             frontPointer = frontPointer.next;
+            //
         }
         return true;
     }

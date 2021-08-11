@@ -51,24 +51,19 @@ public class DiameterOfBinaryTree{
  * }
  */
 class Solution {
-    // bfs 和  dfs  结合
+    int ans = 0;
     public int diameterOfBinaryTree(TreeNode root) {
         if(root == null) return 0;
-        int ans = 0;
-        LinkedList<TreeNode> deque = new LinkedList<>();
-        deque.add(root);
-        while (!deque.isEmpty()) {
-            TreeNode temp = deque.pollFirst();
-            ans = Math.max(ans, dfs(temp.left) + dfs(temp.right));
-            if(temp.left !=null) deque.add(temp.left);
-            if(temp.right !=null) deque.add(temp.right);
-        }
-        return ans;
+        dfs(root);
+        return ans-1;
     }
 
-    private int dfs(TreeNode root){
-        if(root == null) return 0;
-        return Math.max(dfs(root.left), dfs(root.right)) + 1;
+    public int dfs(TreeNode root) {
+        if (root == null)  return 0;
+        int leftMax = dfs(root.left);
+        int rightMax = dfs(root.right);
+        ans = Math.max(ans, 1 + leftMax + rightMax); // root 作为根节点 当前局部最大
+        return 1 + Math.max(leftMax, rightMax); // root作为一边
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
@@ -76,7 +71,17 @@ class Solution {
     
     @Test
     public void testCase(){
-        
+        TreeNode treeNode1 = new TreeNode(1);
+        TreeNode treeNode2 = new TreeNode(2);
+        TreeNode treeNode3 = new TreeNode(3);
+        TreeNode treeNode4 = new TreeNode(4);
+        TreeNode treeNode5 = new TreeNode(5);
+
+        treeNode1.left = treeNode2;
+        treeNode1.right = treeNode3;
+        treeNode2.left = treeNode4;
+        treeNode2.right = treeNode5;
+        new Solution().diameterOfBinaryTree(treeNode1);
     }
   
 }

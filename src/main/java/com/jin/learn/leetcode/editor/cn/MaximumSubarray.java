@@ -66,12 +66,13 @@ public class MaximumSubarray{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    // dp 关键是看 tempMax是负数 就丢了
     public int maxSubArray(int[] nums) {
         int tempMax = nums[0];
         int max = tempMax;
 
         for (int i = 1; i < nums.length; i++) {
-            if (tempMax + nums[i] >  nums[i]) {
+            if (tempMax  > 0) {
                 tempMax += nums[i];
             }else {
                 tempMax = nums[i];

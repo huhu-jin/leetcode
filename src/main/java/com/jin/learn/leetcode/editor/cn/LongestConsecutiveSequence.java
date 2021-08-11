@@ -44,9 +44,10 @@ public class LongestConsecutiveSequence{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int longestConsecutive(int[] nums) {
-        if(nums == null || nums.length ==0) return 0;
+
         TreeSet<Integer> set = new TreeSet<>();
+        public int longestConsecutive(int[] nums) {
+        if(nums == null || nums.length ==0) return 0;
         for (int i : nums) {
             set.add(i);
         }

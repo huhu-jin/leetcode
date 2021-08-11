@@ -41,17 +41,17 @@ public class MajorityElement{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int majorityElement(int[] nums) {
-        int x =0;
+        int ans =0;
         int count=0;
         for (int i : nums) {
-            if (count == 0)  x = i;
-            if (x == i) {
+            if (count == 0)  ans = i;
+            if (ans == i) {
                 count++;
             }else {
                 count--;
             }
         }
-        return x;
+        return ans;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

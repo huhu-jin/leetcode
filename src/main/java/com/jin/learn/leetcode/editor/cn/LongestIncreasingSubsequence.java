@@ -59,23 +59,24 @@ public class LongestIncreasingSubsequence{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    // 不要求连续 不用窗口滑动
     // dp 记录是某个位置  左侧比他小的个数
-    //  dp[i] = Math.max(dp[i], dp[j] + 1); j是0-i的某一段
+    // dp[i] = Math.max(dp[i], dp[j] + 1);
     public int lengthOfLIS(int[] nums) {
         if(nums == null) return 0;
         int[] dp = new int[nums.length];
         dp[0] = 1;
-        int maxans = 1;
+        int ans =1;
         for (int i = 1; i < nums.length; i++) {
             dp[i] = 1;
             for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j]) {
+                if (nums[i] > nums[j]) {  //当前位置
                     dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
-            maxans = Math.max(maxans, dp[i]);
+            ans = Math.max(dp[i], ans); //最大
         }
-        return maxans;
+        return ans;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
@@ -83,7 +84,7 @@ class Solution {
     
     @Test
     public void testCase(){
-        new Solution().lengthOfLIS(new int[]{4,10,4,3,8,9});
+        new Solution().lengthOfLIS(new int[]{1,3,6,7,9,4,10,5,6});
     }
   
 }

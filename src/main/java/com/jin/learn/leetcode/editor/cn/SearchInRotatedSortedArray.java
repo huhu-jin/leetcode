@@ -53,14 +53,29 @@ package com.jin.learn.leetcode.editor.cn;
 
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
+
+
 
 public class SearchInRotatedSortedArray{
   
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    //
+
+    // 显然map 很慢
     public int search(int[] nums, int target) {
+        if (nums == null || nums.length == 0) return -1;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], i);
+        }
+        return map.getOrDefault(target,-1);
+    }
+
+
+    // 二分查找
+    public int search2(int[] nums, int target) {
         if (nums == null || nums.length == 0) return -1;
         int pos = findTheRotatePoint(nums);
         return binarySearch(nums, target, 0, pos) + binarySearch(nums, target, pos + 1, nums.length - 1) + 1;

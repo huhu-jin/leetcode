@@ -41,7 +41,6 @@ import com.jin.learn.leetcode.editor.cn.common.TreeNode;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 
 public class ValidateBinarySearchTree{
@@ -65,7 +64,7 @@ public class ValidateBinarySearchTree{
  */
 class Solution {
     // left < root< right
-
+    // 中序 遍历 成array 判断
     private ArrayList<Integer> list = new ArrayList<>();
 
     public boolean isValidBST(TreeNode root) {

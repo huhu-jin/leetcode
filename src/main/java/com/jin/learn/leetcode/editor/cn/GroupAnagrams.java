@@ -53,6 +53,7 @@ public class GroupAnagrams{
 class Solution {
 
     HashMap<String,List<String>> map = new HashMap<>();
+    // hashmap + 排序
     public List<List<String>> groupAnagrams(String[] strs) {
         if(strs == null || strs.length == 0) return Collections.emptyList();
         for (String s : strs) {

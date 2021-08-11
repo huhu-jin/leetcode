@@ -62,7 +62,7 @@ public class UniquePaths{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    // 朴素的思想 dp
+    //  dp dp[i][j] = dp[i - 1][j] + dp[i][j -1]
     public int uniquePaths(int m, int n) {
         if(m  ==0 || n==0) return 0;
         int[][] dp = new int[m][n];

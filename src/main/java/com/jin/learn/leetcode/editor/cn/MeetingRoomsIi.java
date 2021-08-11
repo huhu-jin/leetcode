@@ -36,8 +36,6 @@ package com.jin.learn.leetcode.editor.cn;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.PriorityQueue;
 
 
