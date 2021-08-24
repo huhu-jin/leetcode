@@ -39,9 +39,7 @@ package com.jin.learn.leetcode.editor.cn;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class GeneralizedAbbreviation{
@@ -49,27 +47,27 @@ public class GeneralizedAbbreviation{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+            // 双变量 元素 回溯
+            List<String> ans = new ArrayList<>();
             public List<String> generateAbbreviations(String word){
-                List<String> ans = new ArrayList<String>();
-                backtrack(ans, new StringBuilder(), word, 0, 0);
+                backtrack(word, new StringBuilder(),0, 0);
                 return ans;
             }
 
-            // i is the current position
-            // k is the count of consecutive abbreviated characters
-            private void backtrack(List<String> ans, StringBuilder builder, String word, int i, int k){
-                int len = builder.length(); // keep the length of builder
-                if(i == word.length()){
-                    if (k != 0) builder.append(k); // append the last k if non zero
+            // i 位置 k是缩写长度
+            private void backtrack( String word, StringBuilder builder, int i, int k){
+                int len = builder.length();
+                if(i == word.length()){ // 出口
+                    if (k != 0) builder.append(k);
                     ans.add(builder.toString());
                 } else {
-                    // the branch that word.charAt(i) is abbreviated
-                    backtrack(ans, builder, word, i + 1, k + 1);
+                    // k长度++ i++(尽可能缩写)
+                    backtrack( word ,builder, i + 1, k + 1);
 
-                    // the branch that word.charAt(i) is kept
+                    // k i 都入builder(尽可能字母)
                     if (k != 0) builder.append(k);
                     builder.append(word.charAt(i));
-                    backtrack(ans, builder, word, i + 1, 0);
+                    backtrack(word , builder,  i + 1, 0);
                 }
                 builder.setLength(len); // reset builder to the original state
             }
