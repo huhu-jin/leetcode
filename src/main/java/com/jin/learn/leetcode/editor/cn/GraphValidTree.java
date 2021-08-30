@@ -36,7 +36,8 @@ class Solution {
 
         //DFS
         // 固定套路
-        // 邻接矩阵 graph [i] [j] 表示 i->j 是通的
+        // 邻接矩阵 graph[i][j]=1  表示 i->j 是通的
+        // 此外graph[i][j] 表示权重
         public boolean validTree(int n, int[][] edges) {
             //构建邻接矩阵
             int[][] graph = new int[n][n];
