@@ -59,7 +59,7 @@ public class InorderSuccessorInBst{
  * }
  */
 class Solution {
-    // 中序遍历 找到相等的值后 接下来就后继节点
+    // 中序遍历  第一个 比他大的就是答案
     public TreeNode ans = null;
 
     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
@@ -69,9 +69,9 @@ class Solution {
 
     public void inorder(TreeNode root,TreeNode p){
         if(root == null || ans != null) return;
-        if(root.left != null) inorder(root.left,p);
+         inorder(root.left,p);
         if(ans == null && root.val>p.val) ans = root;
-        if(root.right != null) inorder(root.right,p);
+         inorder(root.right,p);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
