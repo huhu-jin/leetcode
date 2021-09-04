@@ -166,7 +166,9 @@ public class DesignSearchAutocompleteSystem{
     
     @Test
     public void testCase(){
-        
+        AutocompleteSystem autocompleteSystem = new AutocompleteSystem(new String[]{"i love you", "island", "ironman", "i love leetcode"}, new int[]{5, 3, 2, 2});
+        List<String> i = autocompleteSystem.input('i');
+
     }
-  
+
 }
