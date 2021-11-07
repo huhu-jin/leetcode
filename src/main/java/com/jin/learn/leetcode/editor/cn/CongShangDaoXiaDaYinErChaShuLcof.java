@@ -32,12 +32,9 @@
 
 package com.jin.learn.leetcode.editor.cn;
 
-import com.jin.learn.leetcode.editor.cn.common.TreeNode;
-import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
+import com.jin.learn.common.TreeNode;
 import org.testng.annotations.Test;
-import org.testng.collections.Lists;
 
-import java.awt.*;
 import java.util.LinkedList;
 
 

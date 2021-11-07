@@ -37,7 +37,7 @@
 
 package com.jin.learn.leetcode.editor.cn;
 
-import com.jin.learn.leetcode.editor.cn.common.TreeNode;
+import com.jin.learn.common.TreeNode;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;

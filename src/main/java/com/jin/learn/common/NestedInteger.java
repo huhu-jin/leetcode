@@ -1,4 +1,4 @@
-package com.jin.learn.leetcode.editor.cn.common;
+package com.jin.learn.common;
 
 import java.util.LinkedList;
 import java.util.List;

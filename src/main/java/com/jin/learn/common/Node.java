@@ -1,6 +1,4 @@
-package com.jin.learn.leetcode.editor.cn.common;
-
-import com.jin.learn.leetcode.editor.cn.ConvertBinarySearchTreeToSortedDoublyLinkedList;
+package com.jin.learn.common;
 
 public class Node {
     public int val;

@@ -65,7 +65,7 @@
 
 package com.jin.learn.leetcode.editor.cn;
 
-import com.jin.learn.leetcode.editor.cn.common.ListNode;
+import com.jin.learn.common.ListNode;
 import org.testng.annotations.Test;
 
 

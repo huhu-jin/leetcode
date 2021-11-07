@@ -46,7 +46,7 @@
 
 package com.jin.learn.leetcode.editor.cn;
 
-import com.jin.learn.leetcode.editor.cn.common.NestedInteger;
+import com.jin.learn.common.NestedInteger;
 import org.testng.annotations.Test;
 
 import java.util.List;

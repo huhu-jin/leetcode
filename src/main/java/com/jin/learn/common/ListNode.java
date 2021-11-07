@@ -1,4 +1,4 @@
-package com.jin.learn.leetcode.editor.cn.common;
+package com.jin.learn.common;
 
 public class ListNode {
     public int val;

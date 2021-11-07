@@ -52,7 +52,7 @@
 
 package com.jin.learn.leetcode.editor.cn;
 
-import com.jin.learn.leetcode.editor.cn.common.Node;
+import com.jin.learn.common.Node;
 import org.testng.annotations.Test;
 
 
