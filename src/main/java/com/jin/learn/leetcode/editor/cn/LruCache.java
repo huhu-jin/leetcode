@@ -68,82 +68,62 @@ public class LruCache{
 
 
     //leetcode submit region begin(Prohibit modification and deletion)
-    // 双向链表+ hashMap head tail节点
-    // get 很简单 需要 unlink appendTail
-    // put 分新旧 ,新的 直接appendTail. 旧的 unlink appendTail
+    // 1 双向node链表 +  含有Node的Hash表
+    // 2 虚拟 head tail 防止空指针
+    // 3 get put 都会更新
     class LRUCache {
 
-        public class Node{
-            public int value;
+        class Node{
             public int key;
+            public int value;
             public Node pre;
-            public Node next;
-            public Node(int key, int value) {
-                this.value = value;
-                this.key = key;
-            }
+            public Node nex;
         }
 
-        private Node head;
-        private Node tail;
-        Map<Integer, Node> map = new HashMap <>();
-        private int capacity;
+        private final int capacity;
+        private final Map<Integer, Node> map;
+        private final Node head = new Node();
+        private final Node tail = new Node();
 
         public LRUCache(int capacity) {
             this.capacity = capacity;
-            this.head = new Node(-1, -1);
-            this.tail = new Node(-1, -1);
-            head.next = tail;
+            this.map = new HashMap<>();
+            head.nex = tail;
             tail.pre = head;
         }
 
         public int get(int key) {
             Node node = map.get(key);
-            if (node == null) return -1;
-            // 刷新
-            unLinkNode(node);
-            appendTail(node);
+            if(node == null) return -1;
+            unlink(node);
+            link(node);
             return node.value;
         }
 
-        // put时候,移除最旧的
         public void put(int key, int value) {
-            Node node = map.get(key);
-            if (node == null) {
-                // 新节点
-                node = new Node(key, value);
-                map.put(key, node);
-                if (map.size() > capacity) {
-                    map.remove(head.next.key);
-                    unLinkNode(head.next);
-                }
-            }else {
-                // 老节点
-                node.value = value;
-                unLinkNode(node);
-            }
+            if (map.containsKey(key))  unlink(map.get(key));
 
-            appendTail(node);
+            // 赋值新值
+            Node node = new Node();
+            node.key = key;
+            node.value = value;
+            map.put(key, node);
+
+            link(node);
+            if (map.size() > capacity) unlink(map.remove(head.nex.key));
         }
 
-
-        private void unLinkNode(Node node){
-            node.pre.next = node.next;
-            node.next.pre = node.pre;
-
-            node.next = null;
-            node.pre = null;
+        private void unlink(Node node) {
+            node.pre.nex = node.nex;
+            node.nex.pre = node.pre;
         }
 
-        private void appendTail(Node node) {
-            tail.pre.next = node;
+        private void link(Node node) {
             node.pre = tail.pre;
-
-            node.next = tail;
+            tail.pre.nex = node;
+            node.nex =tail;
             tail.pre = node;
-
         }
-
     }
 
 /**
