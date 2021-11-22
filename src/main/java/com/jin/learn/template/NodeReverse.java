@@ -9,7 +9,7 @@ public class NodeReverse {
         g.next = node;
         ListNode p = node;
         while (true) {
-            ListNode m = p.next;
+            ListNode m = p.next; // 取m.判空,pmg
             if(m == null) break;
             p.next = m.next;
             m.next = g.next;

@@ -78,33 +78,42 @@ public class ReverseNodesInKGroup{
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+
+// 本质还是链表的翻转
+// 多一步翻转前的分组
+
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
+        if(head == null || k<=0) return head;
 
-        if(head == null || head.next == null) return head;
-
-        ListNode dummy = new ListNode();
+        ListNode dummy = new ListNode(-1);
         dummy.next = head;
-        ListNode pre =dummy;
-        while (head !=null) {
-            for (int i = 1; i < k; i++) {
-                if(head.next == null) return dummy.next;
+
+        ListNode groupDummy = dummy;
+        while (true) {
+            for (int i = 0; i < k; i++) {
+                if(head == null)
+                    return dummy.next;
                 head = head.next;
             }
-            pre = reverse(pre, k);
-            head = pre.next;
+            groupDummy = reverse(groupDummy, k);
         }
-        return dummy.next;
     }
 
-    private ListNode reverse(ListNode pre, int k) {
 
-        ListNode p = pre.next;
+    /**
+     *
+     * @param g g 前面节点
+     * @param k
+     * @return p 翻转完最后一个节点
+     */
+    private ListNode reverse(ListNode g, int k) {
+        ListNode p = g.next;
         for (int i = 1; i < k; i++) {
-            ListNode move = p.next;
-            p.next = move.next;
-            move.next = pre.next;
-            pre.next = move;
+           ListNode m = p.next;
+           p.next = m.next;
+           m.next = g.next;
+           g.next = m;
         }
         return p;
     }
