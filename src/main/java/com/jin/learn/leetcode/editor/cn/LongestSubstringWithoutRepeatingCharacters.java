@@ -60,37 +60,6 @@ public class LongestSubstringWithoutRepeatingCharacters{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int lengthOfLongestSubstring(String s) {
-        int maxlength=0;
-        if ("".equals(s) || s == null) {
-            return maxlength;
-        }
-        int p =0;
-        int q =p;
-        for ( p = 0; p < s.length(); p++) {
-            boolean[] exist = new boolean[128];
-            for ( q = p ; q < s.length(); q++) {
-                if (!addIfNotExist(exist, s.charAt(q))) {
-                    maxlength = Math.max(q - p, maxlength);
-                    break;
-                }
-            }
-            maxlength = Math.max(q - p, maxlength);
-            if (maxlength > s.length() - p) {
-                break;
-            }
-        }
-        return maxlength;
-    }
-    private boolean addIfNotExist(boolean [] exist, char c) {
-        if (exist[c]) {
-            return false;
-        }else{
-            exist[c] = true;
-            return true;
-        }
-    }
-
         /**
          *  滑动窗口:
          *  代码采用了一个hashmap记录窗口中元素信息(其中key为窗口元素,value为窗口元素的位置). 一个left位置指针,right位置指针, 在维护滑动窗口大小
@@ -99,12 +68,12 @@ class Solution {
          *  关键点:窗口边界如何滑动?
          *  此题中,left边界一定是遇到相同元素时, 从原先的同元素位置 开始算.
          */
-    private int bestPractice(String s){
+    public int lengthOfLongestSubstring(String s){
         HashMap<Character, Integer> map = new HashMap<>();
         int max = 0; int left = 0;
         for(int right = 0; right < s.length(); right++){
             if(map.containsKey(s.charAt(right))){ // 重复元素
-                left = Math.max(left,map.get(s.charAt(right)) + 1); // 获取left位置
+                left = Math.max(left,map.get(s.charAt(right)) + 1); //(关键) 防止left回退 abba的例子
             }
             map.put(s.charAt(right), right);
             max = Math.max(max, right -left+1); // 计算窗口大小 i(right) - left +1
@@ -116,15 +85,10 @@ class Solution {
 
     @Test
     public void testCase(){
-        Assert.assertEquals(new Solution().lengthOfLongestSubstring(" "),1);
+        Assert.assertEquals(new Solution().lengthOfLongestSubstring("abba"),2);
         Assert.assertEquals(new Solution().lengthOfLongestSubstring("abcabcbb"),3);
         Assert.assertEquals(new Solution().lengthOfLongestSubstring("bbbbbbbb"),1);
-        Assert.assertEquals(new Solution().bestPractice("pwwkew"),3);
   }
 
-    @Test
-    public void testCase2(){
-        Assert.assertEquals(new Solution().bestPractice("hcacabd"),4);
-    }
 
 }
