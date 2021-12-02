@@ -45,53 +45,55 @@ package com.jin.learn.leetcode.editor.cn;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
 
-public class ThreeSum{
-  
-  
+public class ThreeSum {
+
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-            LinkedList<List<Integer>> rets = new LinkedList<>();
+    class Solution {
+        // 类似于两数字和,关键在于去重
+        public List<List<Integer>> threeSum(int[] nums) {
+            List<List<Integer>> ans = new LinkedList<>();
+            if (nums == null || nums.length < 3) return ans;
 
-    public List<List<Integer>> threeSum(int[] nums) {
-        if(nums == null || nums.length < 3) return Collections.emptyList();
-        Arrays.sort(nums);
-        for (int i = 0; i < nums.length && nums[i]<=0; i++) {
-            twoSum(0 - nums[i], nums, i+1);
-        }
+            Arrays.sort(nums);
 
-        return rets;
-    }
+            for (int i = 0; i < nums.length; i++) {
+                if(nums[i]>0) break; // 不可能, 节约时间
+                if (i>0 && nums[i] == nums[i-1]) continue; // 去重
+                int left = i +1;
+                int right = nums.length - 1;
 
-        HashSet<String> set = new HashSet<>();
-
-        private void twoSum(int target, int[] nums, int start) {
-            int end = nums.length-1;
-            while (start < end) {
-                if (nums[start] + nums[end] == target &&
-                        !set.contains(""+(0-target)+nums[start]+nums[end])) {
-                    set.add("" +(0-target) + nums[start] + nums[end]);
-                    rets.add(Arrays.asList(nums[start], nums[end], 0 - target));
-                } else if (nums[start] + nums[end] > target) {
-                    end--;
-                }else {
-                    start++;
+                while (left < right) {
+                    if (left == i || nums[left] + nums[right] + nums[i] < 0) {
+                        left++;
+                    } else if (right == i || nums[left] + nums[right] + nums[i] > 0) {
+                        right--;
+                    } else {
+                        ans.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                        // 去重
+                        while (left < right && nums[left] == nums[left+1]) left++;
+                        while (left < right && nums[right] == nums[right-1]) right--;
+                        left++;
+                        right--;
+                    }
                 }
             }
+
+            return ans;
         }
+
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
-    
+
     @Test
-    public void testCase(){
-        new Solution().threeSum(new int[]{-2,0,1,1,2});
+    public void testCase() {
+        new Solution().threeSum(new int[]{-1,0,1,2,-1,-4});
     }
-  
+
 }
