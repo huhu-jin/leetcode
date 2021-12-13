@@ -38,41 +38,62 @@ package com.jin.learn.leetcode.editor.cn;
 
 import org.testng.annotations.Test;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 
 public class TrappingRainWater{
   
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-        public int trap(int[] height) {
-            int sum = 0;
-            int max = getMax(height);//找到最大的高度，以便遍历。
-            for (int i = 1; i <= max; i++) {
-                boolean isStart = false; //标记是否开始更新 temp
-                int temp_sum = 0;
-                for (int j = 0; j < height.length; j++) {
-                    if (isStart && height[j] < i) {
-                        temp_sum++; // start 以后 洼地面积 ++
+    //单调递增 栈顶最小(如果新元素入栈不符合要求，则将之前的元素出栈，直到符合要求再入栈) -- 记忆 压扁
+
+
+    // left top i啥意思
+    // 左边高度
+    // top 底部
+    // i 右边高度
+        public int trap1(int[] height) {
+            int ans = 0;
+            Deque<Integer> stack = new LinkedList<>();
+            int n = height.length;
+            for (int i = 0; i < n; ++i) {
+                while (!stack.isEmpty() && height[i] > height[stack.peek()]) {
+                    int top = stack.pop();
+                    if (stack.isEmpty()) {
+                        break;
                     }
-                    if (height[j] >= i) { // 遇到高的 temp_sum 加到sum中
-                        sum = sum + temp_sum;
-                        temp_sum = 0;
-                        isStart = true;
-                    }
+                    int left = stack.peek();
+                    int currWidth = i - left - 1; // i -left + 1 -2
+                    int currHeight = Math.min(height[left], height[i]) - height[top];// top是底
+                    ans += currWidth * currHeight;
                 }
+                stack.push(i);
             }
-            return sum;
+            return ans;
         }
 
-        private int getMax(int[] height) {
-            int max = 0;
-            for (int i = 0; i < height.length; i++) {
-                if (height[i] > max) {
-                    max = height[i];
+
+        public int trap(int[] height) {
+            int ans = 0;
+            int left = 0, right = height.length - 1;
+            int leftMax = 0, rightMax = 0;
+            while (left < right) {
+                leftMax = Math.max(leftMax, height[left]);
+                rightMax = Math.max(rightMax, height[right]);
+                if (leftMax < rightMax) {
+                    ans += leftMax - height[left]; // 右边一定高于左边 ,那么一列一列算. 可以接水 最高(左边)-当前
+                    ++left;
+                } else {
+                    ans += rightMax - height[right];
+                    --right;
                 }
             }
-            return max;
+            return ans;
         }
+
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

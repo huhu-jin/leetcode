@@ -59,16 +59,16 @@ public class LongestIncreasingSubsequence{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    // 不要求连续 不用窗口滑动
-    // dp 记录是某个位置  左侧比他小的个数
+    // dp[i] 记录是某个位置  左侧小于等于 个数
     // dp[i] = Math.max(dp[i], dp[j] + 1);
+    // 最大值不一定在末尾
     public int lengthOfLIS(int[] nums) {
         if(nums == null) return 0;
         int[] dp = new int[nums.length];
         dp[0] = 1;
         int ans =1;
         for (int i = 1; i < nums.length; i++) {
-            dp[i] = 1;
+            dp[1] = 1;
             for (int j = 0; j < i; j++) {
                 if (nums[i] > nums[j]) {  //当前位置
                     dp[i] = Math.max(dp[i], dp[j] + 1);
