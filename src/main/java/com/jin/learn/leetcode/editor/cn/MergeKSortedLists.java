@@ -77,7 +77,7 @@ class Solution {
 
     // 分治
     private ListNode mergeSeprate(ListNode[] lists, int start, int end) {
-        if (start >= end) {
+        if (start == end) {
             return lists[end];
         }
         if (start + 1 == end) {

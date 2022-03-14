@@ -84,41 +84,12 @@ public class IntersectionOfTwoLinkedLists{
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-
-        if(headA == null || headB == null) return null;
-        ListNode pa = headA;
-        ListNode pb = headB;
-        while (pa != null && pb != null) {
-            pa = pa.next;
-            pb = pb.next;
+        ListNode A = headA, B = headB;
+        while (A != B) {
+            A = A != null ? A.next : headB;
+            B = B != null ? B.next : headA;
         }
-
-        ListNode distance; // 长短差距多少
-        ListNode log;
-        ListNode sho;
-        if (pa == null) {
-            distance = pb;
-            log = headB;
-            sho = headA;
-        }else {
-            distance = pa;
-            log = headA;
-            sho = headB;
-        }
-        // 抹平长度长,让长的先走
-        while (distance != null) {
-            distance = distance.next;
-            log = log.next;
-        }
-        // 一起到达终点, 如果重合某点会一样
-        while (log != null) {
-            if (log == sho) {
-                return log;
-            }
-            log = log.next;
-            sho = sho.next;
-        }
-        return null;
+        return A;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

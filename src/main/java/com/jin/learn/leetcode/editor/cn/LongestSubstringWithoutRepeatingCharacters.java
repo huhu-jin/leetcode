@@ -73,7 +73,7 @@ class Solution {
         int max = 0; int left = 0;
         for(int right = 0; right < s.length(); right++){
             if(map.containsKey(s.charAt(right))){ // 重复元素
-                left = Math.max(left,map.get(s.charAt(right)) + 1); //(关键) 防止left回退 abba的例子
+                left = Math.max(left, map.get(s.charAt(right))+1); //关键
             }
             map.put(s.charAt(right), right);
             max = Math.max(max, right -left+1); // 计算窗口大小 i(right) - left +1
@@ -85,7 +85,7 @@ class Solution {
 
     @Test
     public void testCase(){
-        Assert.assertEquals(new Solution().lengthOfLongestSubstring("abba"),2);
+        Assert.assertEquals(new Solution().lengthOfLongestSubstring("tmmzuxt"),2);
         Assert.assertEquals(new Solution().lengthOfLongestSubstring("abcabcbb"),3);
         Assert.assertEquals(new Solution().lengthOfLongestSubstring("bbbbbbbb"),1);
   }

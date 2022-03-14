@@ -12,7 +12,7 @@ public class HeapSort {
 
     public void sort(int[] nums) {
         buildHeap(nums);
-        for (int i = nums.length - 1; i >= 0; i--) {
+        for (int i = nums.length - 1; i > 0; i--) {
             // 交换 顶节点(最大) 和 尾巴节点
             swap(nums, 0, i);
             maxHeapify(nums, 0, i);
@@ -27,7 +27,7 @@ public class HeapSort {
     }
 
 
-    // 从顶到底  递归Heapify (最大值在root节点)
+    // 从顶到底  递归Heapify (最大值在root节点) 打定对
     public void maxHeapify(int[] trees, int root, int len) {
         int l = (root * 2) + 1; // 左儿子
         int r = (root * 2) + 2; // 右儿子
