@@ -3,79 +3,102 @@ package com.jin.learn.template;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.security.Key;
 import java.util.Arrays;
 
+// https://www.youtube.com/watch?v=j2_JW3In9PE&list=PLV5qT67glKSErHD66rKTfqerMYz9OaTOs&index=3
 public class BinarySearch {
 
 
-    public boolean isExist(int[] arrays, int target) {
-        if (arrays == null) return false;
-        Arrays.sort(arrays);
-
-        int left = 0;
-        int right = arrays.length-1;
-        // 取到相等
-        // p 加减1
-        while (left <= right) {
-            int p = (left + right) / 2;
-            if(arrays[p] < target){
-                left = p +1;
-            }else if (arrays[p] > target){
-                right = p -1;
-            }else {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // 找到比他大 最进的数
-    public int findNearest(int[] arrays, int target) {
+    // 查找精确值
+    // 循环条件 l<=r
+    // 收缩空间 l = mid +1 , r = mid-1
+    public int search(int[] arrays, int target) {
         if (arrays == null) return -1;
         Arrays.sort(arrays);
 
-        int left = 0;
-        int right = arrays.length-1;
+        int l = 0;
+        int r = arrays.length - 1;
+        while (l <= r) {
+            int mid = (l + r) / 2;
+            if (arrays[mid] < target) {
+                l = mid + 1;
+            } else if (arrays[mid] > target) {
+                r = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return -1;
+    }
 
-        int p =0;
-        while (left <= right) {
-             p = (left + right) / 2;
-            if(arrays[p] < target){
-                left = p +1;
-            }else if (arrays[p] > target){
-                right = p -1;
-            }else {
-                return arrays[p]; // 相等
+    // 查找模糊值(比4大的最小数)
+    // l< r
+    // 收缩空间 l = mid +1 , r = mid 或者 l = mid , r = mid-1
+    public int search1(int[] arrays, int target) {
+        if (arrays == null) return -1;
+        Arrays.sort(arrays);
+
+        int l = 0;
+        int r = arrays.length - 1;
+        while (l < r) {
+            int mid = (l + r) / 2;
+            if (arrays[mid] < target) {
+                l = mid +1 ;
+            } else  {
+                r = mid ;
+            }
+        }
+        return l;
+    }
+
+
+    // 万用型 最接近k
+    // l<r-1
+    // l = mid, r = mid
+    public int search2(int[] arrays, int target) {
+        if (arrays == null) return -1;
+        Arrays.sort(arrays);
+
+        int l = 0, r = arrays.length - 1;
+        while (l < r-1) {
+            int mid = (l + r) / 2;
+            if (arrays[mid] < target) {
+                l = mid;
+            } else  {
+                r = mid ;
             }
         }
 
-        // 没有相等的
-        while (p + 1 < arrays.length - 1 && Math.abs(arrays[p] - target) > Math.abs(arrays[p + 1] - target)) {
-            p++;
+        if (arrays[r] < target) {
+            return r;
+        } else if (arrays[l] > target) {
+            return l;
+        }else {
+            return target - arrays[l] < arrays[r] - target ? l : r;
         }
-        return arrays[p];
+    }
+
+
+
+
+    @Test
+    public void testCase() {
+        int exist = new BinarySearch().search(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}, 6);
+        Assert.assertEquals(exist,5);
+        int exist1 = new BinarySearch().search(new int[]{1, 2, 3, 4, 6, 7, 8, 9}, 5);
+        Assert.assertEquals(exist1,-1);
+        int exist2 = new BinarySearch().search(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}, 10);
+        Assert.assertEquals(exist2,-1);
     }
 
 
     @Test
-    public void testCase (){
-        boolean exist = new BinarySearch().isExist(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}, 6);
-        Assert.assertTrue(exist);
-        boolean exist1 = new BinarySearch().isExist(new int[]{1, 2, 3, 4, 6, 7, 8, 9}, 5);
-        Assert.assertFalse(exist1);
-        boolean exist2 = new BinarySearch().isExist(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}, 10);
-        Assert.assertFalse(exist2);
-    }
-
-
-    @Test
-    public void testCase2 (){
-        int v = new BinarySearch().findNearest(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}, 6);
-        Assert.assertEquals(6, v);
-
-         v = new BinarySearch().findNearest(new int[]{1, 2, 3, 4, 6, 7, 8, 9}, 5);
-        Assert.assertEquals(6, v);
-
+    public void testCase1() {
+        int exist = new BinarySearch().search1(new int[]{1, 1, 2 , 2, 2 , 6, 7}, 2);
+        Assert.assertEquals(exist,2);
+        int exist1 = new BinarySearch().search1(new int[]{1, 1, 2 , 2, 2 , 6, 7}, 8);
+        Assert.assertEquals(exist1,6);
 
     }
 
