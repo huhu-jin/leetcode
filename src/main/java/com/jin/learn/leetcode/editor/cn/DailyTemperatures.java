@@ -47,6 +47,10 @@ public class DailyTemperatures{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+        // 单调递减栈(从栈底到栈顶递减)
+        // https://leetcode-cn.com/problems/daily-temperatures/solution/leetcode-tu-jie-739mei-ri-wen-du-by-misterbooo/
+        //  v < 栈顶 -> index入栈
+        //  v >= 栈顶 -> 出栈
         public int[] dailyTemperatures(int[] temperatures) {
             int[] ans = new int[temperatures.length]; // 定长的ans
             Deque<Integer> stack = new LinkedList<>(); //  从栈底到栈顶 对应的温度列表中的温度依次递减
@@ -55,7 +59,7 @@ class Solution {
                 // 弹出小于的栈 并计算差值
                 while (!stack.isEmpty() && temperature > temperatures[stack.peek()]) {
                     int prevIndex = stack.pop();
-                    ans[prevIndex] = i - prevIndex;
+                    ans[prevIndex] = i - prevIndex; // 当前位置- 以前的
                 }
                 stack.push(i); // 入栈是 index
             }
