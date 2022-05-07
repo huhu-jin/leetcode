@@ -64,9 +64,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class BinaryTreeInorderTraversal{
-  
-  
+public class BinaryTreeInorderTraversal {
+
+
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
@@ -86,27 +86,19 @@ public class BinaryTreeInorderTraversal{
      */
     class Solution {
         // inorder left -> root -> right
-
-        LinkedList<Integer> res = new LinkedList<Integer>();
+        List<Integer> ans = new LinkedList<>();
 
         public List<Integer> inorderTraversal(TreeNode root) {
             dfs(root);
-            return res;
+            return ans;
         }
 
         private void dfs(TreeNode root) {
             if(root == null) return;
             dfs(root.left);
-            res.add(root.val);
+            ans.add(root.val);
             dfs(root.right);
         }
-    }
-//leetcode submit region end(Prohibit modification and deletion)
-
-    
-    @Test
-    public void testCase(){
-        
-    }
-  
 }
+//leetcode submit region end(Prohibit modification and deletion)
+    }

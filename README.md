@@ -3,7 +3,7 @@
 
 - TemplateFilePath 项目路径
 ```
-/Users/jinzh3/workspace/jin/leetcode/src/main/java/com/jin/learn
+/home/jin/workspace/home/java/leetcode/src/main/java/com/jin/learn/
 ```
 
 - CodeFileName 类名的命名规范

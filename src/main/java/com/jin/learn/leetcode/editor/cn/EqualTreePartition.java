@@ -60,6 +60,9 @@ package com.jin.learn.leetcode.editor.cn;
 import com.jin.learn.common.TreeNode;
 import org.testng.annotations.Test;
 
+import java.util.LinkedList;
+import java.util.List;
+
 
 public class EqualTreePartition{
   
@@ -83,34 +86,24 @@ public class EqualTreePartition{
 class Solution {
     // 先计算和
     // 然后 找一半的子树
-    private boolean ans=false;
-    private TreeNode root;
+
+    List<Integer> treeSum = new LinkedList<>();
     public boolean checkEqualTree(TreeNode root) {
-        this.root = root;
-        int target =  dfs(root);
+        int target =  sum(root);
         if (target % 2 == 0) {
-            dfs(root, target/2);
-            return ans;
+            treeSum.remove(treeSum.size() - 1); //求子树 不要root
+            return treeSum.contains(target/2);
         }
         return false;
     }
 
-    private int dfs(TreeNode root) {
+    private int sum(TreeNode root) {
         if (root == null) return 0;
-        return dfs(root.right) + root.val +  dfs(root.left);
+        int s = sum(root.right) + root.val + sum(root.left);
+        treeSum.add(s); // 顺便记录所有的子树和
+        return s;
     }
 
-
-    private int dfs(TreeNode root, int target) {
-        if (root == null) return 0;
-        int left = dfs(root.left, target);
-        int right = dfs(root.right,target);
-        if (left + root.val + right== target && root !=this.root) {
-            ans = true;
-        }
-
-        return left + right + root.val;
-    }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
