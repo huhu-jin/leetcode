@@ -72,7 +72,7 @@ class Solution {
     
     @Test
     public void testCase(){
-        boolean b = new Solution().canWin("+++++");
+        boolean b = new Solution().canWin("++");
         System.out.println(b);
     }
   
