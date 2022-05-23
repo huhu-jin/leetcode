@@ -59,15 +59,12 @@ public class Solution extends VersionControl {
     public int firstBadVersion(int n) {
         int left = 0;
         int right = n;
-        while(true){
+        while(left <= right){
             int mid = left + (right - left) / 2; // 防止越界
-            if(!isBadVersion(mid)){
-                if(isBadVersion(mid+1)) return mid+1;
-                left = mid +1;
-            }else{
-                right = mid-1;
-            }
+            if(isBadVersion(mid))right = mid-1;
+            else  left = mid +1;
         }
+        return left;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
