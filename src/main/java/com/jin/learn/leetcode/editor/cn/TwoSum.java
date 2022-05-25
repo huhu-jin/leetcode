@@ -54,7 +54,7 @@ import java.util.Map;
 
 public class TwoSum {
     //leetcode submit region begin(Prohibit modification and deletion)
-    // 关键点在于 边迭代边add 入map中
+    // 0(n) 关键点在于 边迭代边add 入map中
     class Solution {
         public int[] twoSum(int[] nums, int target) {
             Map<Integer, Integer> map = new HashMap<Integer, Integer>();
@@ -68,6 +68,7 @@ public class TwoSum {
             throw new IllegalArgumentException("No two sum solution");
         }
     }
+    // nlog(n) 排序双指针
 //leetcode submit region end(Prohibit modification and deletion)
 
 
