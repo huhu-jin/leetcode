@@ -29,17 +29,20 @@ public class MoveZeroes{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    // 把0移动到后面, 并保持顺序不变
     public void moveZeroes(int[] nums) {
         if (nums == null || nums.length ==1) return;
-        int left = 0, right = 0;
-        // 一直交换 包括自己和自己 然后 left++ 和 right ++
-        // 遇到0 停止交换, 只有right++
-        while (right < nums.length) {
+
+        int left =0;
+        while (left< nums.length && nums[left]!= 0) { // l 找到第一个0
+            left++;
+        }
+
+        for (int right = left; right < nums.length; right++) { // r 找到非0
             if (nums[right] != 0) {
                 swap(nums, left, right);
-                left++;
+                left++;// 关键
             }
-            right++;
         }
     }
 

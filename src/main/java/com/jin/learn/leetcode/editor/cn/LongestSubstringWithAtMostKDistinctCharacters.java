@@ -57,6 +57,7 @@ class Solution {
                 right++;
             }else {
                 ans = Math.max(right - left, ans);
+                // 窗口减少时候 一个一个出去
                 int val = map.get(s.charAt(left));
                 if (val == 1) {
                     map.remove(s.charAt(left));
