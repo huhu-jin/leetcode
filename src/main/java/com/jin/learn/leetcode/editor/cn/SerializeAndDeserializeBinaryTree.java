@@ -56,9 +56,11 @@ import com.jin.learn.common.TreeNode;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 
 public class SerializeAndDeserializeBinaryTree{
@@ -76,57 +78,24 @@ public class SerializeAndDeserializeBinaryTree{
  */
 public class Codec {
 
-    // 不是满 二叉树 !!!
-    // null也入队列, 到4-null,5-null. 为止
-    // Encodes a tree to a single string.
+    // pre order
     public String serialize(TreeNode root) {
-        if (root ==null) return "";
-        StringBuilder builder = new StringBuilder();
-        Deque<TreeNode> deque = new LinkedList<>();
-        deque.add(root);
-        while (!deque.isEmpty()){
-            TreeNode temp = deque.poll();
-            if (temp != null) {
-                builder.append(temp.val);
-                deque.add(temp.left);
-                deque.add(temp.right);
-            }else {
-                builder.append("n");
-            }
-            builder.append(",");
-        }
-        String ans = builder.toString();
-        return ans.substring(0,ans.length()-1);
+        if(root == null) return "#";
+        return root.val + "," + serialize(root.left) + "," + serialize(root.right);
     }
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        if (data.equals("")) {
-            return null;
-        }
-        String[] split = data.split(",");
+        Queue<String> queue = new LinkedList<>(Arrays.asList(data.split(",")));
+        return helper(queue) ;
+    }
 
-        TreeNode root = new TreeNode();
-        root.val = Integer.parseInt(split[0]);
-        Deque<TreeNode> deque = new LinkedList<>();
-        deque.add(root);
-        int i = 1;
-        while (!deque.isEmpty()) {
-            TreeNode temp = deque.poll();
-            if (!"n".equals(split[i])) {
-                temp.left = new TreeNode(Integer.parseInt(split[i]));
-                deque.add( temp.left);
-            }
-            i++;
-
-            if (!"n".equals(split[i])) {
-                temp.right = new TreeNode(Integer.parseInt(split[i]));
-                deque.add( temp.right);
-            }
-            i++;
-
-        }
-
+    private TreeNode helper(Queue<String> queue) {
+        String value = queue.poll();
+        if("#".equals(value)) return null;
+        TreeNode root = new TreeNode(Integer.parseInt(value));
+        root.left = helper(queue);
+        root.right = helper(queue);
         return root;
     }
 }
