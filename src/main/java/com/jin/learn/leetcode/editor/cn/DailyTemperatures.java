@@ -38,8 +38,10 @@ package com.jin.learn.leetcode.editor.cn;
 
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Stack;
 
 
 public class DailyTemperatures{
@@ -47,9 +49,14 @@ public class DailyTemperatures{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-        // 单调递减栈(从栈底到栈顶递减)
+        // 单调递减栈 (从栈底到栈顶元素对应的 递减)
+        // | 1 |
+        // | 2 |
+        // | 3 |
+
+
         // https://leetcode-cn.com/problems/daily-temperatures/solution/leetcode-tu-jie-739mei-ri-wen-du-by-misterbooo/
-        //  v < 栈顶 -> index入栈
+        //  v < 栈顶 -> (index 索引)入栈
         //  v >= 栈顶 -> 出栈
         public int[] dailyTemperatures(int[] temperatures) {
             int[] ans = new int[temperatures.length]; // 定长的ans
@@ -71,6 +78,9 @@ class Solution {
     
     @Test
     public void testCase(){
+        int[] source = new int[10];
+        Deque<Integer> stack = new LinkedList<>();
+
 
     }
   
