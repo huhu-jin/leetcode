@@ -69,18 +69,24 @@ public class RemoveDuplicatesFromSortedArray{
 class Solution {
     // two points
     public int removeDuplicates(int[] nums) {
-        if (nums==null || nums.length==0) return 0;
-
-        int i=0;
-        for (int j=1 ; j < nums.length; j++) {
-            if (i +1< nums.length && nums[j] != nums[i]) {
-                swap(nums, i+1, j);
-                i++;
+        int left = 0;
+        int right = 0;
+        int n = nums.length;
+        while (right < n) {
+            swap(nums, left, right);
+            if (needRemove(nums, left)) {//需要删除 l不动 r++
+                right++;
+            } else {
+                left++;
+                right++;
             }
-
         }
-        return i+1;
+
+        return left ;
     }
+        private boolean needRemove(int [] nums, int i){
+            return i >0 && i < nums.length && nums[i] == nums[i - 1];
+        }
 
         private void swap(int[] nums, int i, int j) {
             int temp = nums[i];
