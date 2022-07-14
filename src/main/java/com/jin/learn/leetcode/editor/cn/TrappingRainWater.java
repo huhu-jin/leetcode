@@ -47,51 +47,32 @@ public class TrappingRainWater{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    //单调递增 栈顶最小(如果新元素入栈不符合要求，则将之前的元素出栈，直到符合要求再入栈) -- 记忆 压扁
 
 
-    // left top i啥意思
-    // 左边高度
-    // top 底部
-    // i 右边高度
-        public int trap1(int[] height) {
-            int ans = 0;
-            Deque<Integer> stack = new LinkedList<>();
-            int n = height.length;
-            for (int i = 0; i < n; ++i) {
-                while (!stack.isEmpty() && height[i] > height[stack.peek()]) {
-                    int top = stack.pop();
-                    if (stack.isEmpty()) {
-                        break;
-                    }
-                    int left = stack.peek();
-                    int currWidth = i - left - 1; // i -left + 1 -2
-                    int currHeight = Math.min(height[left], height[i]) - height[top];// top是底
-                    ans += currWidth * currHeight;
+    // 单调递减栈
+    // 他是一层一层 计算的
+    // https://leetcode.cn/problems/trapping-rain-water/solution/trapping-rain-water-by-ikaruga/
+    public int trap(int[] height) {
+        int ans = 0;
+        Deque<Integer> stack = new LinkedList<>();
+        for (int i = 0; i < height.length; ++i) {
+
+            while (!stack.isEmpty() && height[i] > height[stack.peek()]) {
+                int top = stack.pop(); // 底
+                if (stack.isEmpty()) {
+                    break;
                 }
-                stack.push(i);
+                int left = stack.peek(); // 新顶做为left
+                int currWidth = i - left - 1; // i -left + 1 -2   i 为右边,
+                int currHeight = Math.min(height[left], height[i]) - height[top]; //  height[top] 想对高度
+                ans += currWidth * currHeight;
             }
-            return ans;
+            stack.push(i);
         }
+        return ans;
+    }
 
 
-        public int trap(int[] height) {
-            int ans = 0;
-            int left = 0, right = height.length - 1;
-            int leftMax = 0, rightMax = 0;
-            while (left < right) {
-                leftMax = Math.max(leftMax, height[left]);
-                rightMax = Math.max(rightMax, height[right]);
-                if (leftMax < rightMax) {
-                    ans += leftMax - height[left]; // 右边一定高于左边 ,那么一列一列算. 可以接水 最高(左边)-当前
-                    ++left;
-                } else {
-                    ans += rightMax - height[right];
-                    --right;
-                }
-            }
-            return ans;
-        }
 
 
 }
@@ -101,7 +82,6 @@ class Solution {
     @Test
     public void testCase(){
         new Solution().trap(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1});
-        
     }
   
 }
