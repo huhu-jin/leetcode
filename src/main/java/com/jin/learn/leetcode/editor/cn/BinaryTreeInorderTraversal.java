@@ -60,6 +60,7 @@ package com.jin.learn.leetcode.editor.cn;
 import com.jin.learn.common.TreeNode;
 import org.testng.annotations.Test;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -88,7 +89,7 @@ public class BinaryTreeInorderTraversal {
         // inorder left -> root -> right
         List<Integer> ans = new LinkedList<>();
 
-        public List<Integer> inorderTraversal(TreeNode root) {
+        public List<Integer> inorderTraversal2(TreeNode root) {
             dfs(root);
             return ans;
         }
@@ -99,6 +100,40 @@ public class BinaryTreeInorderTraversal {
             ans.add(root.val);
             dfs(root.right);
         }
+
+        public List<Integer> inorderTraversal(TreeNode root) {
+            List<Integer> ans = new LinkedList<>();
+            Deque<TreeNode> stack = new LinkedList<>();
+            while (root != null || !stack.isEmpty()) {
+                while (root != null) {
+                    stack.push(root);
+                    root = root.left;
+                }
+                root = stack.pop();
+                ans.add(root.val);
+                root = root.right;
+            }
+
+
+            return ans;
+
+        }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
+
+
+    @Test
+    public void testCase(){
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(3);
+
+        node1.right = node2;
+        node2.left = node3;
+
+
+        List<Integer> integers = new Solution().inorderTraversal(node1);
+        System.out.println('1');
+    }
     }
