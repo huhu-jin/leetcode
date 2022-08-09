@@ -1,6 +1,6 @@
-//  [94]二叉树的中序遍历
+//  [144]二叉树的前序遍历
 
-//给定一个二叉树的根节点 root ，返回它的 中序 遍历。 
+//给你二叉树的根节点 root ，返回它节点值的 前序 遍历。 
 //
 // 
 //
@@ -8,7 +8,7 @@
 //
 // 
 //输入：root = [1,null,2,3]
-//输出：[1,3,2]
+//输出：[1,2,3]
 // 
 //
 // 示例 2： 
@@ -29,7 +29,7 @@
 //
 // 
 //输入：root = [1,2]
-//输出：[2,1]
+//输出：[1,2]
 // 
 //
 // 示例 5： 
@@ -50,9 +50,8 @@
 //
 // 
 //
-// 进阶: 递归算法很简单，你可以通过迭代算法完成吗？ 
-// Related Topics 栈 树 深度优先搜索 二叉树 
-// 👍 1030 👎 0
+// 进阶：递归算法很简单，你可以通过迭代算法完成吗？ 
+// Related Topics 栈 树 深度优先搜索 二叉树 👍 865 👎 0
 
 
 package com.jin.learn.leetcode.editor.cn;
@@ -65,9 +64,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class BinaryTreeInorderTraversal {
-
-
+public class BinaryTreePreorderTraversal{
+  
+  
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
@@ -86,26 +85,22 @@ public class BinaryTreeInorderTraversal {
      * }
      */
     class Solution {
-        // inorder left -> root -> right
-        List<Integer> ans = new LinkedList<>();
+        List<Integer> ans = new LinkedList<Integer>();
 
-        public List<Integer> inorderTraversal(TreeNode root) {
-            Deque<TreeNode> deque = new LinkedList<>();
+
+        public List<Integer> preorderTraversal(TreeNode root) {
+            Deque<TreeNode> queue = new LinkedList<>();
             if (root == null) return ans;
+            queue.add(root);
 
-            deque.add(root);
-            while (!deque.isEmpty()){
-                TreeNode top = deque.peek();
-                if (top.left != null) {
-                    TreeNode left = top.left;
-                    top.left = null;
-                    deque.push(left);
-                }else {
-                    TreeNode poll = deque.pollFirst();
-                    ans.add(poll.val);
-                    if (poll.right != null) {
-                        deque.push(poll.right);
-                    }
+            while (!queue.isEmpty()) {
+                TreeNode poll = queue.poll();
+                ans.add(poll.val);
+                if (poll.right != null) {
+                    queue.push(poll.right);
+                }
+                if (poll.left != null) {
+                    queue.push(poll.left);
                 }
             }
 
@@ -113,11 +108,18 @@ public class BinaryTreeInorderTraversal {
         }
 
         private void dfs(TreeNode root) {
-            if(root == null) return;
-            dfs(root.left);
+            if (root== null) return;
             ans.add(root.val);
+            dfs(root.left);
             dfs(root.right);
         }
-}
-//leetcode submit region end(Prohibit modification and deletion)
     }
+//leetcode submit region end(Prohibit modification and deletion)
+
+    
+    @Test
+    public void testCase(){
+        
+    }
+  
+}
