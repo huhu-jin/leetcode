@@ -56,7 +56,7 @@ class Solution {
         Deque<Integer> deque = new LinkedList<>();
         for (int i = 0, j = 0; i < pushed.length; i++) {
             deque.add(pushed[i]);
-            while (!deque.isEmpty()&& deque.peekLast() == popped[i]&& ++j>=0) deque.pollLast();
+            while (!deque.isEmpty()&& deque.peekLast() == popped[j]&& ++j>=0) deque.pollLast();
         }
         return deque.isEmpty();
     }
