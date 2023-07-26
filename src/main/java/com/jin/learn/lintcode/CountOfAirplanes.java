@@ -1,7 +1,7 @@
 package com.jin.learn.lintcode;
 
 
-import sun.jvm.hotspot.utilities.Interval;
+//import sun.jvm.hotspot.utilities.Interval;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,45 +29,45 @@ import java.util.List;
  */
 public class CountOfAirplanes {
 
-     class Node {
-        public int time;
-        public int cost;
-
-        public Node() {
-        }
-        // 时间，开始时间cost为1，结束时间cost为-1
-        public Node(int time, int cost) {
-            this.time = time;
-            this.cost = cost;
-        }
-    }
-    //先按照时间升序，再按照cost升序排序
-     Comparator<Node> cNode = new Comparator<Node>() {
-        public int compare(Node o1, Node o2) {
-            if(o1.time != o2.time) {
-                return o1.time - o2.time;
-            }
-            return o1.cost - o2.cost; // 先降后升
-        }
-    };
-
-    public int countOfAirplanes(List<Interval> airplanes) {
-
-        //扫描线数组
-        List<Node>room = new ArrayList<>();
-        for(int i = 0; i < airplanes.size(); i++) {
-            room.add(new Node((int)airplanes.get(i).getLowEndpoint(), 1));
-            room.add(new Node((int)airplanes.get(i).getHighEndpoint(), -1));
-        }
-
-        //排序
-        Collections.sort(room, cNode);
-        int ans = 0;
-        int tmp = 0;
-        for(int i = 0; i < room.size(); i++) {
-            tmp += room.get(i).cost;
-            ans = Math.max(ans, tmp);
-        }
-        return ans;
-    }
+//     class Node {
+//        public int time;
+//        public int cost;
+//
+//        public Node() {
+//        }
+//        // 时间，开始时间cost为1，结束时间cost为-1
+//        public Node(int time, int cost) {
+//            this.time = time;
+//            this.cost = cost;
+//        }
+//    }
+//    //先按照时间升序，再按照cost升序排序
+//     Comparator<Node> cNode = new Comparator<Node>() {
+//        public int compare(Node o1, Node o2) {
+//            if(o1.time != o2.time) {
+//                return o1.time - o2.time;
+//            }
+//            return o1.cost - o2.cost; // 先降后升
+//        }
+//    };
+//
+//    public int countOfAirplanes(List<Interval> airplanes) {
+//
+//        //扫描线数组
+//        List<Node>room = new ArrayList<>();
+//        for(int i = 0; i < airplanes.size(); i++) {
+//            room.add(new Node((int)airplanes.get(i).getLowEndpoint(), 1));
+//            room.add(new Node((int)airplanes.get(i).getHighEndpoint(), -1));
+//        }
+//
+//        //排序
+//        Collections.sort(room, cNode);
+//        int ans = 0;
+//        int tmp = 0;
+//        for(int i = 0; i < room.size(); i++) {
+//            tmp += room.get(i).cost;
+//            ans = Math.max(ans, tmp);
+//        }
+//        return ans;
+//    }
 }
