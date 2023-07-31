@@ -46,7 +46,7 @@ public class Q2_Archaeologist {
 
     private void dfs(List<Character> items, int depth, int targetSize, boolean[] used, LinkedList<Character> paths, LinkedList<String> ans) {
         if (depth == targetSize) {
-            ans.add(paths.toString());
+            ans.add(buildString(paths));
         }
 
 
@@ -75,6 +75,14 @@ public class Q2_Archaeologist {
 
 
 
+    }
+
+    private String buildString(LinkedList<Character> paths) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Character c : paths) {
+            stringBuilder.append(c);
+        }
+        return stringBuilder.toString();
     }
 
 
