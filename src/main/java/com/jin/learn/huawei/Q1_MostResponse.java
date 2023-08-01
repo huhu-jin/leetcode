@@ -35,12 +35,13 @@ import java.util.PriorityQueue;
 public class Q1_MostResponse {
 
     public static int[] dijkstra(int[][] graph, int startNode) {
-        int n = graph.length;
-        int[] dist = new int[n];
+        int[] dist = new int[graph.length];
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[startNode] = 0;
 
-        PriorityQueue<NodeDistance> priorityQueue = new PriorityQueue<>();
+        // 优先队列，按照距离从小到大排序
+        PriorityQueue<NodeDistance> priorityQueue = new PriorityQueue<>((i,j)->i.distance-j.distance);
+
         priorityQueue.add(new NodeDistance(startNode, 0));
 
         while (!priorityQueue.isEmpty()) {
@@ -48,12 +49,7 @@ public class Q1_MostResponse {
             int currentNode = current.node;
             int currentDistance = current.distance;
 
-            // 如果当前节点的距离已经更新过，跳过这个节点
-            if (currentDistance > dist[currentNode]) {
-                continue;
-            }
-
-            for (int neighbor = 0; neighbor < n; neighbor++) {
+            for (int neighbor = 0; neighbor < graph[currentNode].length; neighbor++) {
                 int edgeWeight = graph[currentNode][neighbor];
                 if (edgeWeight > 0) { // 如果存在边连接当前节点与邻居节点
                     int totalDistance = currentDistance + edgeWeight;
@@ -68,7 +64,7 @@ public class Q1_MostResponse {
         return dist;
     }
 
-    static class NodeDistance implements Comparable<NodeDistance> {
+    static class NodeDistance  {
         int node;
         int distance;
 
@@ -77,19 +73,15 @@ public class Q1_MostResponse {
             this.distance = distance;
         }
 
-        @Override
-        public int compareTo(NodeDistance other) {
-            return Integer.compare(this.distance, other.distance);
-        }
     }
 
     public static void main(String[] args) {
         int[][] graph = {
-                {0, 7, 0, 3, 0},
+                {0, 7, -1, 3, -1},
                 {7, 0, 4, 2, 6},
-                {0, 4, 0, 0, 5},
-                {3, 2, 0, 0, 0},
-                {0, 6, 5, 0, 0}
+                {-1, 4, 0, -1, 5},
+                {3, 2, -1, 0, -1},
+                {-1, 6, 5, -1, 0}
         };
         int startNode = 0;
 
