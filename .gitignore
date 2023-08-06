@@ -6,6 +6,7 @@
 /.idea/*
 !*.java
 /.idea/
-/target/
+/target/*
 all.json
 translation.json
+/src/main/java/com/jin/learn/leetcode/editor/cn/doc/content/*
