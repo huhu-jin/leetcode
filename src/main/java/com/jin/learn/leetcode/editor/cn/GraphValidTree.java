@@ -92,7 +92,10 @@ class Solution {
         int n;
         int[] parent;
         int[] rank;
-        int count; //连同分量
+        // 在 DisjointSet 类中，count 初始值为 n，也就是创建不相交集合数据结构时元素的数量。
+        // 每当调用 union 方法合并两个不同的集合时，count 会减少，因为合并操作会将两个集合合并成一个，因此不相交的连通分量数量减少了一个。
+        // 最终，count 的值将表示当前数据结构中剩余的不相交连通分量的数量。
+        int count;
 
         DisjointSet(int n) {
             this.n = n;

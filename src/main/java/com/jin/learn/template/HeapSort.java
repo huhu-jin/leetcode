@@ -10,15 +10,19 @@ public class HeapSort {
     // 左儿子= (i * 2) + 1;
     // 右儿子 = (i * 2) + 2;
 
+    // 每个节点满足 父节点的值大于子节点
+
     public void sort(int[] nums) {
         buildHeap(nums);
         for (int i = nums.length - 1; i > 0; i--) {
             // 交换 顶节点(最大) 和 尾巴节点
             swap(nums, 0, i);
-            maxHeapify(nums, 0, i);
+            maxHeapify(nums, 0, i); //做一次 堆化, i 表是当前节点数目
         }
     }
 
+    // 堆:
+    // 完全二叉树 且 父节点 大于 子节点
     public void buildHeap(int[] nums){
         // 从最后一个子节点 的父节点开始 从低先上做 maxHeapify
         for (int i = nums.length / 2 -1; i >= 0; i--) {
@@ -27,7 +31,10 @@ public class HeapSort {
     }
 
 
-    // 从顶到底  递归Heapify (最大值在root节点) 打定对
+    // 从顶到底  递归Heapify (最大值在root节点)
+
+    // len 是 数组长度 防止出界
+    // root 是父节点index
     public void maxHeapify(int[] trees, int root, int len) {
         int l = (root * 2) + 1; // 左儿子
         int r = (root * 2) + 2; // 右儿子
@@ -48,6 +55,10 @@ public class HeapSort {
         }
 
     }
+
+
+
+
 
     private void swap(int[] nums, int i, int j) {
         int temp = nums[i];
