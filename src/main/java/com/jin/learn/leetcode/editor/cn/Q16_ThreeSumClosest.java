@@ -50,6 +50,11 @@ public class Q16_ThreeSumClosest{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     // 同15 排序 + 双指针
+    // i 从0开始
+    // l = i +1
+    // r = nums.length -1
+    // 三数之和  = nums[i] + nums[l] + nums[r]
+    // 太大则 r-- 太小则 l++
     public int threeSumClosest(int[] nums, int target) {
         Integer ans  = null;
         Arrays.sort(nums);

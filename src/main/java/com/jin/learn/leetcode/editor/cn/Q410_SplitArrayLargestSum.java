@@ -49,7 +49,14 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 
 
-
+/**
+ *  题干中的 : 你需要将这个数组分成 m 个非空的连续子数组
+ *  就是 123|45 原先的顺序不能乱 这个很重要!!!
+ *
+ *  然后 分成 m块. 相当与m个篮子, 每个篮子的能装 期望的num
+ *  从头开始遍历, 累加, 如果累加的值 > subArraySum, 换一个篮子.
+ *
+ */
 public class Q410_SplitArrayLargestSum{
   
   
@@ -76,8 +83,8 @@ class Solution {
             int curSum = 0, count =1;
             for (int num : nums) {
                 curSum += num;
-                if (curSum > subArraySum) { // 累加到 >subArraySum时候 计算份书
-                    curSum = num;
+                if (curSum > subArraySum) { // 累加到 >subArraySum时候 计算份数
+                    curSum = num; // 多出来的 加到新的篮子里去
                     count ++;
                     if (count > m) return false;
                 }
@@ -92,7 +99,10 @@ class Solution {
     
     @Test
     public void testCase(){
-        
+
+        int i = new Solution().splitArray(new int[]{7, 2, 5, 10, 8}, 2);
+
+
     }
   
 }

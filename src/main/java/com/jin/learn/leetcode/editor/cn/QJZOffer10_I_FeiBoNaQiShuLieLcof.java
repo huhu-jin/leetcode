@@ -39,11 +39,10 @@
 
 package com.jin.learn.leetcode.editor.cn;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class QJZOffer10-I_FeiBoNaQiShuLieLcof{
+public class QJZOffer10_I_FeiBoNaQiShuLieLcof{
   
   
     //leetcode submit region begin(Prohibit modification and deletion)

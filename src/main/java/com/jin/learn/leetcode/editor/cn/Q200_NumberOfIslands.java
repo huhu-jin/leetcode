@@ -76,7 +76,7 @@ class Solution {
             }
 
             if (grid[i][j] == '1') {
-                grid[i][j] = '0';
+                grid[i][j] = '0'; // 标记访问过的地方
                 recur(grid, i - 1, j);
                 recur(grid, i , j-1);
                 recur(grid, i + 1, j);

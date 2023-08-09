@@ -53,24 +53,33 @@ package com.jin.learn.leetcode.editor.cn;
 
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 
 public class Q300_LongestIncreasingSubsequence{
-  
-  
+
+
+/*
+dp[i] 表示：以 nums[i] 结尾 的「上升子序列」的长度。注意：这个定义中 nums[i] 必须被选取，且必须是这个子序列的最后一个元素；
+状态转移方程 : 如果一个较大的数接在较小的数后面，就会形成一个更长的子序列。只要 nums[i] 严格大于在它位置之前的某个数，那么 nums[i] 就可以接在这个数后面形成一个更长的上升子序列。
+             dp[i] = Math.max(dp[i], dp[j] + 1);
+
+*/
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    // dp[i] 记录是某个位置  左侧小于等于 个数
-    // dp[i] = Math.max(dp[i], dp[j] + 1);
-    // 最大值不一定在末尾
+
     public int lengthOfLIS(int[] nums) {
         if(nums == null) return 0;
         int[] dp = new int[nums.length];
-        dp[0] = 1;
+        Arrays.fill(dp, 1);
         int ans =1;
+
+
+
+
         for (int i = 1; i < nums.length; i++) {
-            dp[1] = 1;
             for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j]) {  //当前位置
+                if (nums[i] > nums[j]) {  // i 大于 在它前面的某个数(nums[j]),  dp[i] 可能就是 dp[j] + 1
                     dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }

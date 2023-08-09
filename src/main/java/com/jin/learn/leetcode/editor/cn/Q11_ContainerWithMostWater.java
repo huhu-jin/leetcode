@@ -61,7 +61,7 @@ public class Q11_ContainerWithMostWater{
     //leetcode submit region begin(Prohibit modification and deletion)
     // 双指针left right
     // 从两端向内移动,短那段向内移动
-    //s(l,r) =  min(h[l],h[r])* (r-l+1)
+    //s(l,r) =  min(h[l],h[r])* (r-l)
     // 证明:
     // 1 如果 移动是长边 一定小于 未移动的面积.因为面积是短边决定
 

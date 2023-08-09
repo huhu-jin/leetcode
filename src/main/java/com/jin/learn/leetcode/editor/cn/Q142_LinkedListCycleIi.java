@@ -86,14 +86,18 @@ public class Solution {
         ListNode slow = head;
 
         while (true) {
+            // 无环
             if (slow == null || fast == null || fast.next == null) {
                 return null;
             }
             fast = fast.next.next;
             slow = slow.next;
-            if (fast == slow) break;
+            if (fast == slow) break; // 有环 且相遇
         }
         fast =head;
+        // 其实应该这么理解 s = nb .
+        // 说明 s 刚好是整圈b 那实际 a + kb +c(c是重入环点,开始计算到相遇点距离) a + kb +c = nb 成立的
+        // 就是 a +c =b 就是 从相遇点c开走a 步正好到入环点
         while (fast != slow) {
             fast = fast.next;
             slow = slow.next;
