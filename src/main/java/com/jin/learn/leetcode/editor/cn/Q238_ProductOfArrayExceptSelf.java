@@ -62,7 +62,7 @@ class Solution {
     
     @Test
     public void testCase(){
-        
+        new Solution().productExceptSelf(new int[]{1, 2, 3, 4});
     }
   
 }

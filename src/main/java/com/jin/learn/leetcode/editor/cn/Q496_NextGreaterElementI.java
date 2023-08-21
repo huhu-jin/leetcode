@@ -63,6 +63,9 @@ public class Q496_NextGreaterElementI{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     // 单调递减栈 + hash表缓存
+
+    //单调栈专门解决Next Greater Number，这句点题
+    //把nums都算出来
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         HashMap<Integer, Integer> memo = new HashMap<>();
         Deque<Integer> stack = new LinkedList<>();

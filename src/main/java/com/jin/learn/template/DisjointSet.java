@@ -25,7 +25,7 @@ public class DisjointSet {
 
         // 合并 会变成链 引入rank
         if (rank[y_root] > rank[x_root]) {
-            parent[x_root] = y_root;
+            parent[x_root] = y_root;  // rank小的 当页节点
         }else if(rank[y_root] < rank[x_root]){
             parent[y_root] = x_root ;
         }else {

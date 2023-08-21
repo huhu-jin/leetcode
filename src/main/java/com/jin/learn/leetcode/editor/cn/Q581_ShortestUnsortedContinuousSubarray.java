@@ -62,46 +62,35 @@ public class Q581_ShortestUnsortedContinuousSubarray{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    // 1 利用 treemap
-    // 2treemap找一个比i大key (需要翻转) end = i;
-    // 2start 历史最小
-    // 3 ans = end -start
-    public int findUnsortedSubarray1(int[] nums) {
-        if(nums == null || nums.length ==1) return 0;
-        TreeMap<Integer, Integer> map = new TreeMap<>();
-        Integer start = null;
-        Integer end=0;
-        map.put(nums[0],0);
-        for (int i = 1; i < nums.length; i++) {
-            Map.Entry<Integer, Integer> entry = map.higherEntry(nums[i]); // 得到一个比原先key大的
-            if (entry != null) {
-                if (start == null) {
-                    start = entry.getValue();
-                }else {
-                    start = Math.min(start, entry.getValue());
-                }
-                end = i;
-            }
-            map.putIfAbsent(nums[i], i);
-        }
-        if(start == null) return 0;
-        return end - start + 1;
-    }
+    // https://leetcode.cn/problems/shortest-unsorted-continuous-subarray/solutions/422614/si-lu-qing-xi-ming-liao-kan-bu-dong-bu-cun-zai-de-/
 
 
-    // 比较取巧的方法
-    // 排序后nums 和原来的 比较
-    // 找到不同的开始和结束
+    // 左边有序 中间无序 右边有序   分为这样三段
+    // min max
     public int findUnsortedSubarray(int[] nums) {
-        int n = nums.length;
-        int[] arr = nums.clone();
-        Arrays.sort(arr);
-        int i = 0, j = n - 1;
-        while (i <= j && nums[i] == arr[i]) i++;
-        while (i <= j && nums[j] == arr[j]) j--;
-        return j - i + 1;
-    }
+        //初始化
+        int len = nums.length;
+        int min = nums[len-1];
+        int max = nums[0];
+        int begin = 0, end = -1;
 
+        //遍历
+        for(int i = 0; i < len; i++){
+            if(nums[i] < max){     // 从左往右
+                end = i;
+            }else{
+                max = nums[i]; // 当前值 > max , 那么 不需要排序 , end 不用往前走
+            }
+
+            if(nums[len-i-1] > min){    //从右到左维持最小值，寻找左边界begin
+                begin = len-i-1;
+            }else{
+                min = nums[len-i-1];
+            }
+        }
+
+        return end-begin+1;
+    }
 
 }
 //leetcode submit region end(Prohibit modification and deletion)

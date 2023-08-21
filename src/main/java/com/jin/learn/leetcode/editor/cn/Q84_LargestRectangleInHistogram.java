@@ -50,24 +50,6 @@ public class Q84_LargestRectangleInHistogram{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-        // 暴力  O(n2)
-        public int largestRectangleArea1(int[] heights) {
-            int ans =0;
-            for (int i = 0; i < heights.length; i++) {
-                int v = heights[i];
-                int l = i;
-                int r = i;
-
-                while (l>=0 && heights[l] >= v) l--;
-                while (r< heights.length && heights[r] >= v) r++;
-
-                ans = Math.max(ans, (r - l-1) * v);
-            }
-            return ans;
-        }
-
-
-
         // 单调递增栈
         public int largestRectangleArea2(int[] heights) {
             int len = heights.length;
@@ -157,7 +139,7 @@ class Solution {
     
     @Test
     public void testCase(){
-        int i = new Solution().largestRectangleArea1(new int[]{2, 1, 5, 6, 2, 3});
+        int i = new Solution().largestRectangleArea2(new int[]{2, 1, 5, 6, 2, 3});
     }
   
 }

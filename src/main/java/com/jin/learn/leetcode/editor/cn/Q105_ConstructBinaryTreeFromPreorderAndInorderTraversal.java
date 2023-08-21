@@ -75,7 +75,7 @@ class Solution {
      * @param preRight 二叉树前序遍历结果的右边界
      * @param inLeft   二叉树后序遍历结果的左边界
      * @param inRight  二叉树后序遍历结果的右边界
-
+      我来总结个口诀：前序找根，中序来分。意思是每次都可以通过前序找到根节点，再用中序遍历确定新的左右子树的范围，最后递归这个过程就可以了。
      */
     private TreeNode buildTree(int[] preorder, int[] inorder, int preLeft, int preRight, int inLeft, int inRight){
         if (preLeft > preRight || inLeft > inRight) {
@@ -86,7 +86,7 @@ class Solution {
         int InOrderLeftLength = 0;
         for (int i = inLeft; i <= inRight; i++) {
             if(inorder[i] == rootValue){
-                InOrderLeftLength = i - inLeft;
+                InOrderLeftLength = i - inLeft;   // 找到中序的 中点
                 break;
             }
         }

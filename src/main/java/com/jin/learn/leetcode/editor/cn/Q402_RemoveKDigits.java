@@ -45,6 +45,8 @@ import org.testng.annotations.Test;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 
 
 public class Q402_RemoveKDigits{
@@ -55,50 +57,36 @@ class Solution {
     // 单调递增栈
     // 1 2 3 4 这样是ok的  1 2 3 2 那么3 就要remove
     public String removeKdigits(String num, int k) {
-        Deque<Integer> deque = new LinkedList<>();
-        int i =0;
-        for (; k > 0 && i < num.length();i++) {
-            int value = Integer.parseInt(String.valueOf(num.charAt(i)));
-            while (!deque.isEmpty() && value < Integer.parseInt(String.valueOf(num.charAt(deque.peek()))) && k > 0) {
-                deque.pop();
-                k--;
+        Stack<Character> stack = new Stack<>();
+        int remain = num.length() - k;
+        for (char digit : num.toCharArray()) {
+            while (k > 0 && !stack.isEmpty() && stack.peek() > digit) {
+                stack.pop();
+                k--; // 标记移除多少
             }
-            deque.push(i);
+            stack.push(digit);
         }
-        while (k > 0) {
-            deque.pop();
-            k--;
+
+        // 合并答案
+        StringBuilder result = new StringBuilder();
+        for (Character digit : stack.subList(0, remain)) {
+            result.append(digit);
         }
-        if (deque.isEmpty()) return "0";
 
-        StringBuilder builder = new StringBuilder();
-        while (!deque.isEmpty()) {
-            builder.append(num.charAt(deque.pollLast()));
-        }
-        String ans = builder + num.substring(i);
-
-        StringBuilder tureAns = new StringBuilder();
-        boolean flag =false;
-        for (int j = 0; j < ans.length(); j++) {
-
-            if ((!flag && j == ans.length() - 1) || flag || ans.charAt(j) != '0') {
-                tureAns.append(ans.charAt(j));
-                flag = true;
-            }
-
-        }
-        return tureAns.toString();
+        String finalResult = result.toString().replaceAll("^0+", ""); // 去除先导的 "0000"
+        return finalResult.isEmpty() ? "0" : finalResult;
     }
-}
+
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
     
     @Test
     public void testCase(){
+        new Solution().removeKdigits("00001432219", 3);
         new Solution().removeKdigits("9", 1);
         new Solution().removeKdigits("10200", 1);
         new Solution().removeKdigits("10", 1);
-        new Solution().removeKdigits("1432219", 3);
     }
   
 }

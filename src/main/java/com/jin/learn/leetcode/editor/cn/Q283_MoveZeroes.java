@@ -25,7 +25,7 @@ import java.util.Arrays;
 
 
 public class Q283_MoveZeroes{
-  
+ // 同向双指针
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {

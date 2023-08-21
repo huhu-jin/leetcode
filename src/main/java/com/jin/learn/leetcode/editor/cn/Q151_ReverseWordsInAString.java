@@ -81,8 +81,6 @@ package com.jin.learn.leetcode.editor.cn;
 
 import org.testng.annotations.Test;
 
-import java.util.Deque;
-import java.util.LinkedList;
 
 
 public class Q151_ReverseWordsInAString{
@@ -90,26 +88,36 @@ public class Q151_ReverseWordsInAString{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public String reverseWords(String s) {
+        public String reverseWords(String s) {
 
-        Deque<String> deque = new LinkedList<>();
-        int left =0;
-        int right =0 ;
-        for (; right < s.length(); right++) {
-            if(s.charAt(right) == ' '){
-                // 截取 left -> right
-                if(right > left) deque.push(s.substring(left, right));
-                left = right +1; // 遇到 ' ' 重置left
+            s = s.strip();
+            String [] arr = s.split(" +");
+            int i =0;
+            int j = arr.length-1;
+
+            while(i< j){
+                swap(arr, i,j);
+                i++;
+                j--;
+
             }
-        }
-        if(right > left) deque.push(s.substring(left, right));
 
-        return String.join(" ", deque);
-    }
+            return String.join(" ", arr);
+
+
+        }
+
+        public void swap (String[] arr, int i, int j){
+            String temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+
+
+        }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
-    
+
     @Test
     public void testCase(){
         new Solution().reverseWords("  Bob    Loves  Alice    ");

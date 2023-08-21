@@ -51,11 +51,10 @@ class Solution {
      String removeDuplicateLetters(String s) {
          Stack<Character> stk = new Stack<>();
 
-         // 维护一个计数器记录字符串中字符的数量
          // 因为输入为 ASCII 字符，大小 256 够用了
          int[] count = new int[256];
          for (int i = 0; i < s.length(); i++) {
-             count[s.charAt(i)]++;
+             count[s.charAt(i)]++; // 计数 字母出现次数
          }
 
          boolean[] inStack = new boolean[256];

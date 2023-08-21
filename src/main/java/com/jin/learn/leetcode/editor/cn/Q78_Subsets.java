@@ -54,6 +54,7 @@ class Solution {
         return ans;
     }
 
+    // start 是关键
     private void backtracking(List<List<Integer>> ans, ArrayList<Integer> temp, int[] nums, int start) {
         ans.add(new ArrayList<>(temp));
         for (int i = start; i < nums.length; i++) {
@@ -63,22 +64,6 @@ class Solution {
         }
     }
 
-
-        // bit mask
-    public List<List<Integer>> subsets2(int[] nums) {
-        int size = 1 << nums.length;
-        List<List<Integer>> res = new ArrayList<>(size);
-        for (int i = 0; i < size; i++) {
-            ArrayList<Integer> temp = new ArrayList<>();
-            for (int j=0; j < nums.length; j++) {
-                if (((i >> j) & 1) == 1) {
-                    temp.add(nums[j]);
-                }
-            }
-            res.add(temp);
-        }
-        return res;
-    }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

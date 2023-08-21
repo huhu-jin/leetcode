@@ -68,24 +68,42 @@ dp[i] 表示：以 nums[i] 结尾 的「上升子序列」的长度。注意：�
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-    public int lengthOfLIS(int[] nums) {
+    public int lengthOfLIS1(int[] nums) {
         if(nums == null) return 0;
         int[] dp = new int[nums.length];
         Arrays.fill(dp, 1);
         int ans =1;
 
 
-
-
         for (int i = 1; i < nums.length; i++) {
             for (int j = 0; j < i; j++) {
                 if (nums[i] > nums[j]) {  // i 大于 在它前面的某个数(nums[j]),  dp[i] 可能就是 dp[j] + 1
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                    dp[i] = Math.max(dp[i], dp[j] + 1); // dp[i] 存最大值
                 }
             }
             ans = Math.max(dp[i], ans); //最大
         }
         return ans;
+    }
+
+    // 优化 https://leetcode.cn/problems/longest-increasing-subsequence/solutions/24173/zui-chang-shang-sheng-zi-xu-lie-dong-tai-gui-hua-2/
+    // tail 单调栈  到某个位置时候的 最小 子序列
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length, ans = 1;
+        int[] f = new int[n + 1]; // +1 防止越界
+        Arrays.fill(f, Integer.MAX_VALUE);
+        for (int i = 0; i < n; i++) {
+            int l = 1, r = i + 1;
+            // 二分查找
+            while (l < r) {
+                int mid = l + r >> 1;
+                if (f[mid] >= nums[i]) r = mid;
+                else l = mid + 1;
+            }
+            f[r] = nums[i];
+            ans = Math.max(ans, r);
+        }
+        return ans ;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

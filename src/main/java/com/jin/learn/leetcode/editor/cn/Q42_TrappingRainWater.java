@@ -50,19 +50,19 @@ class Solution {
 
 
     // 单调递减栈
-    // 他是一层一层 计算的
+    // 基本原理是一个洼地 计算完, 将其添平
     // https://leetcode.cn/problems/trapping-rain-water/solution/trapping-rain-water-by-ikaruga/
     public int trap(int[] height) {
         int ans = 0;
         Deque<Integer> stack = new LinkedList<>();
         for (int i = 0; i < height.length; ++i) {
-
+            // 遇到小的 直接入栈,大的 弹出原来的
             while (!stack.isEmpty() && height[i] > height[stack.peek()]) {
                 int top = stack.pop(); // 底
                 if (stack.isEmpty()) {
                     break;
                 }
-                int left = stack.peek(); // 新顶做为left
+                int left = stack.peek(); // 新顶做为left  不弹出栈
                 int currWidth = i - left - 1; // i -left + 1 -2   i 为右边,
                 int currHeight = Math.min(height[left], height[i]) - height[top]; //  height[top] 想对高度
                 ans += currWidth * currHeight;
