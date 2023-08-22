@@ -90,20 +90,35 @@ class Solution {
 
         if (key > root.val) {
             root.right = deleteNode(root.right, key);
-
         } else if (key < root.val) {
             root.left = deleteNode(root.left, key);
         } else {
             if (root.left == null) return root.right;
             if (root.right == null) return root.left;
+
+
+//                ┌───┐
+//            ┌───┤ 5 ├───┐
+//            │   └───┘   │
+//          ┌─┴─┐      ┌──┴┐
+//      ┌───┤ 4 │    ┌─┤ 6 ├──┐
+//      │   └───┘    │ └───┘  │
+//    ┌─┴─┐          │        │
+//    │ 2 │         ┌┴──┐   ┌─┴─┐
+//    └───┘         │5.5│   │ 7 │
+//                 ┌┴───┘   └───┘
+//                 │
+//               ┌─┴─┐
+//               │5.4│
+//               └───┘
+// 删除5 这个节点.  一定是6 去代替
+// 然后找6 的最小 坐子树的 节点去连接 4
             TreeNode node = root.right;
             while (node.left != null) {
                 node = node.left;
             }
             node.left = root.left;
-            root = root.right;
-
-
+            return root.right;
         }
 
         return root;

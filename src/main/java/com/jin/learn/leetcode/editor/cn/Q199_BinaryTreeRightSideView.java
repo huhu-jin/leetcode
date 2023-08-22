@@ -94,6 +94,22 @@ class Solution {
         return ans;
 
     }
+
+    // https://leetcode.cn/problems/binary-tree-right-side-view/solutions/214871/jian-dan-bfsdfs-bi-xu-miao-dong-by-sweetiee/?envType=study-plan-v2&envId=leetcode-75
+    public void dfs(TreeNode root, List<Integer> path, int depth) {
+        if (root == null) return;
+
+        if (depth > path.size()) { // 用层数 和 path 结果集 判断 是否 第一次进入 该层
+            path.add(root.val);
+        }
+
+        depth++;
+        dfs(root.right, path, depth);
+        dfs(root.left, path, depth);
+
+
+
+    }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
