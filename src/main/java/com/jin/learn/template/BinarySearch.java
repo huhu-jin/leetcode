@@ -12,7 +12,6 @@ public class BinarySearch {
 
     // 查找精确值
     // 循环条件 l<=r
-    // 收缩空间 l = mid +1 , r = mid-1
     public int search(int[] arrays, int target) {
         if (arrays == null) return -1;
         Arrays.sort(arrays);
@@ -32,56 +31,57 @@ public class BinarySearch {
         return -1;
     }
 
-    // 查找模糊值(比4大的最小数)
-    // l< r
-    // 收缩空间 l = mid +1 , r = mid 或者 l = mid , r = mid-1
-    public int search1(int[] arrays, int target) {
-        if (arrays == null) return -1;
-        Arrays.sort(arrays);
 
+
+    // 求 >= target 的地一个 如 1,2,3,3,4,5,5,  target =3  index=2
+    // 不存在返回 数组长度
+    public int search1(int[] arrays, int target) {
         int l = 0;
-        int r = arrays.length - 1;
-        while (l < r) {
+        int r = arrays.length - 1; // 左闭右闭
+        while (l <= r) {
             int mid = (l + r) / 2;
             if (arrays[mid] < target) {
                 l = mid +1 ;
             } else  {
-                r = mid ;
+                r = mid-1 ;
             }
         }
         return l;
     }
 
 
-    // 万用型 最接近k
-    // l<r-1
-    // l = mid, r = mid
-    public int search2(int[] arrays, int target) {
-        if (arrays == null) return -1;
-        Arrays.sort(arrays);
 
-        int l = 0, r = arrays.length - 1;
-        while (l < r-1) {
-            int mid = (l + r) / 2;
-            if (arrays[mid] < target) {
-                l = mid;
-            } else  {
-                r = mid ;
-            }
-        }
 
-        if (arrays[r] < target) {
-            return r;
-        } else if (arrays[l] > target) {
-            return l;
-        }else {
-            return target - arrays[l] < arrays[r] - target ? l : r;
+    // (红)r l(蓝)
+    // 左闭 右开
+    public int search2(int[] nums) {
+        int n = nums.length;
+        int l = 0, r = n;
+        while (l < r) {
+            int mid = l + r >> 1;
+            if (nums[mid] > nums[mid + 1]) r = mid;
+            else l = mid + 1;
         }
+        return l;
     }
+    // rl 在一起 蓝开始
+
+
+    public int search3(int[] nums) {
+        int n = nums.length;
+        int l = -1, r = n; // 左开 右开
+        while (l +1 < r) {
+            int mid = l + r >> 1;
+            if (nums[mid] > nums[mid + 1]) r = mid;
+            else l = mid;
+        }
+        return r;
+    }
+    // l(红) r(蓝)
 
 
 
-
+    // 红 小 蓝大
     @Test
     public void testCase() {
         int exist = new BinarySearch().search(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}, 6);
@@ -95,11 +95,16 @@ public class BinarySearch {
 
     @Test
     public void testCase1() {
-        int exist = new BinarySearch().search1(new int[]{1, 1, 2 , 2, 2 , 6, 7}, 2);
+
+
+        int exist2 = new BinarySearch().search1(new int[]{2, 2, 2 , 2, 2 , 6, 7}, 1);
+        Assert.assertEquals(exist2,7);
+
+
+        int exist = new BinarySearch().search1(new int[]{1, 1, 3 , 3, 3 , 6, 7}, 2);
         Assert.assertEquals(exist,2);
         int exist1 = new BinarySearch().search1(new int[]{1, 1, 2 , 2, 2 , 6, 7}, 8);
-        Assert.assertEquals(exist1,6);
-
+        Assert.assertEquals(exist1,7);
     }
 
 

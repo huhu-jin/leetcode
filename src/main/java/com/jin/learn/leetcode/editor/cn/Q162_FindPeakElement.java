@@ -48,27 +48,30 @@ public class Q162_FindPeakElement{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    // 奇怪的二分
+    // 题设中一定存在 极值. 且 只要找到极值 就可以了
+    // 红色 表示 峰顶的左侧
+    // 蓝色分表示    峰顶  峰顶的右侧
+    // 找蓝起点
+    // 最右边 一定 蓝的
+    // https://www.bilibili.com/video/BV1QK411d76w/?spm_id_from=333.788&vd_source=cddd85b95457ed135fe2b861b7bf803b
     public int findPeakElement(int[] nums) {
         int n = nums.length;
-        int l = 0;
-        int r = n - 1;
-        while (l <r) {
-            int mid = l + (r - l) / 2;
-            if (nums[mid] > nums[mid + 1]) {
-                r = mid;
-            }else {
-                l = mid+1;
-            }
+        int l = 0, r = n - 2; // 左闭 右闭
+        while (l <= r) {
+            int mid = l + r >> 1;
+            if (nums[mid] > nums[mid + 1]) r = mid-1;
+            else l = mid + 1;
         }
-        return r;
+        return l;
     }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
     
     @Test
     public void testCase(){
+        new Solution().findPeakElement(new int[]{1, 2, 3, 1});
         
     }
   
