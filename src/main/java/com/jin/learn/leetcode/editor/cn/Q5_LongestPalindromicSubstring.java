@@ -54,29 +54,30 @@ public class Q5_LongestPalindromicSubstring{
   
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    // 中心扩散法
-    // abba 的中心点
-    // a ab b bb b ba a 一共5个
-    // 这个迭代法很神奇. 两个变量, left right 0,0   0,1   1,1    1,2 迭代
-    // center / 2 , center / 2 + center % 2    这样迭代
+        // 中心扩散法
+        // abba 的中心点
+    // 注意中心 i i 或者是 i i+1
+     String result = "";
     public String longestPalindrome(String s) {
         // ababa 求最长公共子串
         int len = s.length();
-        String result = "";
-
-        for (int center = 0; center < len * 2 - 1; center++) {
-            int left = center / 2; // 关键
-            int right = left + center % 2; // 关键
-            while (left >= 0 && right < len && s.charAt(left) == s.charAt(right)) {
-                String tmp = s.substring(left, right + 1);
-                if (tmp.length() > result.length()) {
-                    result = tmp;
-                }
-                left--;
-                right++;
-            }
+        for (int center = 0; center < len; center++) {
+            expend(center, center, s, len);
+            expend(center, center+1, s, len);
         }
         return result;
+    }
+
+    public void expend(int left, int right, String s, int len){
+        while (left >= 0 && right < len && s.charAt(left) == s.charAt(right)) {
+            String tmp = s.substring(left, right + 1);
+            if (tmp.length() > result.length()) {
+                result = tmp;
+            }
+            left--;
+            right++;
+        }
+
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -34,6 +34,7 @@ public class Q338_CountingBits{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     // 输出 0 -n 所有数字
+     //    https://leetcode.cn/problems/counting-bits/solutions/7882/hen-qing-xi-de-si-lu-by-duadua/?envType=study-plan-v2&envId=leetcode-75
         public int[] countBits(int num) {
             int[] result = new int[num + 1];
             for(int i = 1; i <= num; i++){
