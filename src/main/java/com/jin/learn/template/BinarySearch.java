@@ -31,8 +31,6 @@ public class BinarySearch {
         return -1;
     }
 
-
-
     // 求 >= target 的地一个 如 1,2,3,3,4,5,5,  target =3  index=2
     // 不存在返回 数组长度
     public int search1(int[] arrays, int target) {
@@ -51,15 +49,14 @@ public class BinarySearch {
 
 
 
-
     // (红)r l(蓝)
     // 左闭 右开
-    public int search2(int[] nums) {
+    public int search2(int[] nums, int target) {
         int n = nums.length;
         int l = 0, r = n;
         while (l < r) {
-            int mid = l + r >> 1;
-            if (nums[mid] > nums[mid + 1]) r = mid;
+            int mid = (l + r) / 2;
+            if (nums[mid] >  target) r = mid;
             else l = mid + 1;
         }
         return l;
@@ -67,17 +64,50 @@ public class BinarySearch {
     // rl 在一起 蓝开始
 
 
-    public int search3(int[] nums) {
+    public int search3(int[] nums, int target) {
         int n = nums.length;
         int l = -1, r = n; // 左开 右开
         while (l +1 < r) {
-            int mid = l + r >> 1;
-            if (nums[mid] > nums[mid + 1]) r = mid;
+            int mid =(l + r) / 2;
+            if (nums[mid] > target) r = mid;
             else l = mid;
         }
         return r;
     }
     // l(红) r(蓝)
+
+
+    // https://www.bilibili.com/video/BV1d54y1q7k7/?spm_id_from=333.337.search-card.all.click
+    public int binarySearch(int[] nums,int target) {
+        int l =-1;
+        int r = nums.length;
+        while (l +1 < r) {
+            int mid = (r-l)/2 + l;
+            if (isRed()) { // 这里根据条件 修改
+                l = mid  ;
+            } else {
+                r = mid;
+            }
+        }
+        return l;
+
+    }
+
+    private boolean isRed() {
+        return false;
+    }
+
+
+    @Test
+
+    public void  test12312(){
+
+        int i = binarySearch(new int[]{1, 2, 3, 5, 5, 5, 8, 9}, 5);
+        System.out.println(i);
+    }
+
+
+
 
 
 
