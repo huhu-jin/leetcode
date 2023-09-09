@@ -44,6 +44,7 @@ package com.jin.learn.leetcode.editor.cn;
 
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -57,28 +58,38 @@ public class Q15_ThreeSum {
     class Solution {
         // 排序 双指针(注意去重复)
         public List<List<Integer>> threeSum(int[] nums) {
-            List<List<Integer>> ans = new LinkedList<>();
-            if (nums == null || nums.length < 3) return ans;
+            List<List<Integer>> ans = new ArrayList<>();
+
             Arrays.sort(nums);
+
             for (int i = 0; i < nums.length; i++) {
-                if (i>0&& nums[i-1] == nums[i]) continue; // 去除重复 -1 -1 -1 0 2
-                int left = i + 1;
-                int right = nums.length - 1;
-                while (left < right) {
-                    if (nums[i] + nums[left] + nums[right] > 0) {
-                        right--;
-                    } else if (nums[i] + nums[left] + nums[right] < 0) {
-                        left++;
-                    } else {
-                        ans.add(Arrays.asList(nums[i], nums[left], nums[right]));
-                        while (left < right && nums[left] == nums[left+1]) left++; // 去重 -1 0 0 0 1
-                        while (left < right && nums[right] == nums[right-1]) right--; // 去重 -1 0 1 1 1
-                        left++;
-                        right--;
+                int target = -nums[i];
+                int l=i+1;
+                int r =nums.length-1;
+                while (l  < r) {
+                    if (nums[l] + nums[r] < target) {
+                        l++;
+                    }
+
+                   else if (nums[l] + nums[r] > target) {
+                        r--;
+                    }else{
+                       ans.add(Arrays.asList(nums[i],nums[l],nums[r]));
+                       while (l < r   && nums[r] == nums[r-1]) r--;  // 去重复
+                       while (l  < r && nums[l] == nums[l+1]) l++;  // 去重复
+                       r--;
+                       l++;
                     }
                 }
+
+
+                while (i +1< nums.length && nums[i] == nums[i+1]) i++; // 去重复
             }
-            return ans;
+
+
+
+        return ans;
+
         }
 
 
