@@ -78,6 +78,7 @@ public class Q1337_TheKWeakestRowsInAMatrix{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] kWeakestRows(int[][] mat, int k) {
+        // 需要 最小堆 ，那么 queue 反而是最大堆， 因为要从top 把大的删除
         PriorityQueue<int[]> queue = new PriorityQueue<>( (i,j) ->{
             int v = j[1] - i[1];
             if (v == 0) {
@@ -87,7 +88,7 @@ class Solution {
 
         });
 
-        // 需要 最小堆 ，那么 queue 反而是最大堆， 因为要从top 把大的删除
+
         for (int i = 0; i < mat.length; i++) {
             int count = binarySearch(mat[i]);
 
