@@ -46,6 +46,7 @@ public class Q242_ValidAnagram{
   
   
     //leetcode submit region begin(Prohibit modification and deletion)
+    // 不用看
 class Solution {
     public boolean isAnagram(String s, String t) {
         HashMap<Character, Integer> memo = new HashMap<>();
